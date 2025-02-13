@@ -8,6 +8,7 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #333;
     line-height: 1.6;
+    background: #f5f5f5;
   }
   a {
     text-decoration: none;
@@ -36,7 +37,7 @@
     height: 100%;
     background-image: url('../nails.jpg'); /* Replace with your image path */
     background-size: cover;
-    background-position: center center;
+    background-position: center;
     background-repeat: no-repeat;
     transform: scale(1);
     transition: transform 0.1s linear;
@@ -319,6 +320,7 @@
   }
   .modal-content h2 {
     margin-bottom: 20px;
+    font-size: 1.75rem;
   }
   .modal-content form {
     display: flex;
@@ -385,7 +387,7 @@
     display: inline-block;
   }
   
-  /* Responsive Adjustments */
+  /* Responsive Adjustments for Tablets and Smaller Devices */
   @media (max-width: 768px) {
     nav {
       flex-direction: column;
@@ -415,26 +417,43 @@
   /* Extra adjustments for very small screens */
   @media (max-width: 480px) {
     nav {
-      padding: 10px 20px;
+      padding: 10px 15px;
     }
     nav .brand {
-      font-size: 24px;
+      font-size: 20px;
     }
     nav ul li a {
-      font-size: 14px;
+      font-size: 12px;
     }
     .hero-content h1 {
       font-size: 28px;
     }
     .hero-content p {
-      font-size: 16px;
+      font-size: 14px;
     }
     .book-btn {
-      padding: 6px 12px;
-      font-size: 14px;
+      padding: 4px 8px;
+      font-size: 12px;
     }
     .container {
       width: 95%;
+    }
+    #loginContainer, #adminContent {
+      padding: 10px;
+      margin: 10px auto;
+    }
+    #loginContainer h2, .modal-content h2 {
+      font-size: 1.2rem;
+    }
+    #loginContainer input,
+    #loginContainer button,
+    header,
+    #logoutBtn,
+    .modal-content label,
+    .modal-content input,
+    .modal-buttons button {
+      font-size: 0.8rem;
+      padding: 6px;
     }
   }
   
