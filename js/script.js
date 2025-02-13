@@ -11,7 +11,14 @@ window.addEventListener('load', () => {
 
 // Import Firebase modules from CDN (Firebase v9+ Modular SDK)
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js";
+import { 
+  getFirestore, 
+  collection, 
+  addDoc, 
+  getDocs,
+  query,
+  where
+} from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js";
 
 // Firebase configuration (replace these values with your own Firebase project's config)
 const firebaseConfig = {
@@ -27,6 +34,13 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
+// Generate and store a unique device ID if not already present
+let deviceID = localStorage.getItem("deviceID");
+if (!deviceID) {
+  deviceID = 'device-' + Date.now() + '-' + Math.floor(Math.random() * 1000000);
+  localStorage.setItem("deviceID", deviceID);
+}
 
 // Scroll Zoom Effect for the Header Background
 const inner = document.querySelector(".inner");
@@ -64,7 +78,8 @@ bookingForm.addEventListener("submit", async function(e) {
   const date = bookingForm.querySelector('input[type="date"]').value;
   const time = bookingForm.querySelector('input[type="time"]').value;
 
-  const appointment = { name, email, date, time, timestamp: Date.now() };
+  // Include the deviceID so we know which device booked this appointment
+  const appointment = { name, email, date, time, deviceID: deviceID, timestamp: Date.now() };
 
   try {
     // Save the appointment in the "appointments" collection in Firestore
@@ -80,7 +95,7 @@ bookingForm.addEventListener("submit", async function(e) {
 });
 
 // Schedule Modal (View Appointments)
-// NOTE: In a production app, you would secure this data. For demo purposes, we load all appointments.
+// NOTE: In a production app, you would secure this data. For demo purposes, we load only the appointments for this device.
 const scheduleModal = document.getElementById("scheduleModal");
 const viewScheduleBtn = document.getElementById("viewScheduleBtn");
 const closeSchedule = document.getElementById("closeSchedule");
@@ -89,9 +104,11 @@ const appointmentsList = document.getElementById("appointmentsList");
 viewScheduleBtn.addEventListener("click", async function() {
   appointmentsList.innerHTML = "";
   try {
-    const querySnapshot = await getDocs(collection(db, "appointments"));
+    // Query Firestore for appointments where deviceID equals the current deviceID
+    const appointmentsQuery = query(collection(db, "appointments"), where("deviceID", "==", deviceID));
+    const querySnapshot = await getDocs(appointmentsQuery);
     if (querySnapshot.empty) {
-      appointmentsList.innerHTML = "<p>No appointments scheduled.</p>";
+      appointmentsList.innerHTML = "<p>No appointments scheduled on this device.</p>";
     } else {
       const list = document.createElement("ul");
       querySnapshot.forEach((doc) => {
