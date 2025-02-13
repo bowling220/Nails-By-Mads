@@ -15,12 +15,6 @@ import {
   updateDoc 
 } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js";
 
-// Import FullCalendar ESM modules from unpkg
-import { Calendar } from "https://unpkg.com/@fullcalendar/core@6.1.7/index.esm.js";
-import dayGridPlugin from "https://unpkg.com/@fullcalendar/daygrid@6.1.7/index.esm.js";
-import timeGridPlugin from "https://unpkg.com/@fullcalendar/timegrid@6.1.7/index.esm.js";
-import interactionPlugin from "https://unpkg.com/@fullcalendar/interaction@6.1.7/index.esm.js";
-
 // Firebase configuration (replace with your actual config)
 const firebaseConfig = {
   apiKey: "AIzaSyD4xCq8DWbttfXmQAB_LGeQoWxfzZMhuiQ",
@@ -114,8 +108,7 @@ async function loadAppointments() {
     });
     
     // Initialize and render FullCalendar with event click handler for editing
-    const calendar = new Calendar(calendarEl, {
-      plugins: [ dayGridPlugin, timeGridPlugin, interactionPlugin ],
+    const calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: 'dayGridMonth',
       headerToolbar: {
         left: 'prev,next today',
