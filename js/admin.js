@@ -15,11 +15,11 @@ import {
   updateDoc 
 } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js";
 
-// Import FullCalendar ESM modules
-import { Calendar } from "https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.7/index.esm.js";
-import dayGridPlugin from "https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.7/index.esm.js";
-import timeGridPlugin from "https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@6.1.7/index.esm.js";
-import interactionPlugin from "https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@6.1.7/index.esm.js";
+// Import FullCalendar ESM modules from unpkg
+import { Calendar } from "https://unpkg.com/@fullcalendar/core@6.1.7/index.esm.js";
+import dayGridPlugin from "https://unpkg.com/@fullcalendar/daygrid@6.1.7/index.esm.js";
+import timeGridPlugin from "https://unpkg.com/@fullcalendar/timegrid@6.1.7/index.esm.js";
+import interactionPlugin from "https://unpkg.com/@fullcalendar/interaction@6.1.7/index.esm.js";
 
 // Firebase configuration (replace with your actual config)
 const firebaseConfig = {
