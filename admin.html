@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin - Exclusive Nails Salon</title>
+  <link rel="stylesheet" href="css/admin.css">
+  <!-- FullCalendar CSS (CDN) -->
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.7/index.global.min.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Login Form -->
+  <div id="loginContainer">
+    <h2>Admin Login</h2>
+    <form id="loginForm">
+      <input type="email" id="adminEmail" placeholder="Admin Email" required>
+      <input type="password" id="adminPassword" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+    <p id="loginError" class="error-message"></p>
+  </div>
+
+  <!-- Admin Content: Calendar and Logout -->
+  <div id="adminContent" style="display:none;">
+    <header>
+      <h1>Appointments Calendar</h1>
+      <button id="logoutBtn">Logout</button>
+    </header>
+    <div id="calendar"></div>
+  </div>
+
+  <!-- Edit Modal for Rescheduling/Canceling Appointments -->
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeEditModal">&times;</span>
+      <h2>Edit Appointment</h2>
+      <div id="appointmentDetails">
+        <p id="appointmentInfo"></p>
+        <label for="newDate">New Date:</label>
+        <input type="date" id="newDate">
+        <label for="newTime">New Time:</label>
+        <input type="time" id="newTime">
+      </div>
+      <div class="modal-buttons">
+        <button id="rescheduleBtn">Reschedule Appointment</button>
+        <button id="cancelBtn">Cancel Appointment</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase and Admin Script -->
+  <script type="module" src="js/admin.js"></script>
+  <!-- FullCalendar JS (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.7/index.global.min.js"></script>
+</body>
+</html>
