@@ -9,10 +9,9 @@
 <body>
   <!-- Header with Scroll Zoom Background -->
   <header id="home">
-    <!-- Desktop Navigation Bar -->
-    <nav class="desktop-nav">
+    <nav>
       <div class="brand">Nails By Mads</div>
-      <ul class="nav-links">
+      <ul>
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#services">Services</a></li>
@@ -21,34 +20,10 @@
         <li><a href="#blog">Blog</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <div class="nav-buttons">
-        <button id="bookBtn" class="book-btn">Book Appointment</button>
-        <button id="viewScheduleBtn" class="book-btn">My Appointments</button>
-      </div>
+      <!-- Two buttons: one for booking, one for viewing appointments -->
+      <button id="bookBtn" class="book-btn">Book Appointment</button>
+      <button id="viewScheduleBtn" class="book-btn">My Appointments</button>
     </nav>
-
-    <!-- Mobile Navigation Bar -->
-    <nav class="mobile-nav">
-      <div class="brand">Nails By Mads</div>
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <!-- This mobile menu is hidden by default and toggled by the hamburger -->
-      <ul class="mobile-nav-links" id="mobileNavLinks">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#testimonials">Testimonials</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#blog">Blog</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><button id="bookBtnMobile" class="book-btn">Book Appointment</button></li>
-        <li><button id="viewScheduleBtnMobile" class="book-btn">My Appointments</button></li>
-      </ul>
-    </nav>
-
     <div class="inner"></div>
     <div class="hero-content">
       <h1>Welcome to Nails By Mads</h1>
@@ -110,7 +85,7 @@
         <h4>- Sarah K.</h4>
       </div>
       <div class="testimonial">
-        <p>"A truly luxurious experience. I highly recommend Nails By Mads."</p>
+        <p>"A truly luxurious experience. I highly recommend Exclusive Nails Salon."</p>
         <h4>- Emily R.</h4>
       </div>
     </div>
@@ -152,7 +127,7 @@
     <div class="contact-info">
       <div class="contact-details">
         <p><strong>Phone:</strong> (123) 456-7890</p>
-        <p><strong>Email:</strong> info@nailsbymads.com</p>
+        <p><strong>Email:</strong> info@exclusivenailssalon.com</p>
         <p><strong>Address:</strong> 1234 Nail St, Beauty City</p>
       </div>
       <div class="map">
@@ -207,19 +182,6 @@
   <script>
     window.addEventListener('load', () => {
       window.scrollTo(0, 0);
-    });
-  </script>
-  
-  <!-- Mobile Nav Toggle Script -->
-  <script>
-    const hamburger = document.getElementById("hamburger");
-    const mobileNavLinks = document.getElementById("mobileNavLinks");
-    hamburger.addEventListener("click", () => {
-      if (mobileNavLinks.style.display === "block") {
-        mobileNavLinks.style.display = "none";
-      } else {
-        mobileNavLinks.style.display = "block";
-      }
     });
   </script>
 </body>
