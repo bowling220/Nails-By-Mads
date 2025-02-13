@@ -22,6 +22,7 @@ body {
   
   #loginContainer h2 {
     margin-bottom: 20px;
+    font-size: 1.75rem;
   }
   
   #loginContainer form {
@@ -70,6 +71,7 @@ body {
     padding: 10px 16px;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 16px;
   }
   
   #calendar {
@@ -100,12 +102,14 @@ body {
   
   .modal-content h2 {
     margin-bottom: 20px;
+    font-size: 1.75rem;
   }
   
   .modal-content label {
     display: block;
     margin-top: 10px;
     font-weight: bold;
+    font-size: 1rem;
   }
   
   .modal-content input {
@@ -114,6 +118,7 @@ body {
     margin-top: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-size: 1rem;
   }
   
   .modal-buttons {
@@ -148,5 +153,77 @@ body {
     right: 15px;
     font-size: 24px;
     cursor: pointer;
+  }
+  
+  /* Responsive Adjustments for Tablets and Smaller Devices */
+  @media (max-width: 768px) {
+    body {
+      margin: 10px;
+    }
+    
+    #loginContainer, #adminContent {
+      width: 95%;
+      margin: 20px auto;
+      padding: 15px;
+    }
+    
+    #loginContainer h2 {
+      font-size: 1.5rem;
+    }
+    
+    #loginContainer input,
+    #loginContainer button {
+      font-size: 14px;
+      padding: 8px;
+    }
+    
+    header {
+      flex-direction: column;
+      text-align: center;
+      gap: 10px;
+    }
+    
+    #logoutBtn {
+      padding: 8px 12px;
+      font-size: 14px;
+    }
+    
+    .modal-content {
+      margin: 20% auto;
+      max-width: 90%;
+      padding: 15px;
+    }
+    
+    .modal-content h2 {
+      font-size: 1.5rem;
+    }
+    
+    .modal-content label,
+    .modal-content input {
+      font-size: 0.9rem;
+    }
+    
+    .modal-buttons button {
+      font-size: 14px;
+      padding: 8px;
+    }
+  }
+  
+  /* Extra Adjustments for Very Small Devices */
+  @media (max-width: 480px) {
+    #loginContainer h2, .modal-content h2 {
+      font-size: 1.3rem;
+    }
+    
+    #loginContainer input,
+    #loginContainer button,
+    header,
+    #logoutBtn,
+    .modal-content label,
+    .modal-content input,
+    .modal-buttons button {
+      font-size: 0.9rem;
+      padding: 6px;
+    }
   }
   

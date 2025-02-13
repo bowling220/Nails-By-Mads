@@ -412,3 +412,29 @@
     }
   }
   
+  /* Extra adjustments for very small screens */
+  @media (max-width: 480px) {
+    nav {
+      padding: 10px 20px;
+    }
+    nav .brand {
+      font-size: 24px;
+    }
+    nav ul li a {
+      font-size: 14px;
+    }
+    .hero-content h1 {
+      font-size: 28px;
+    }
+    .hero-content p {
+      font-size: 16px;
+    }
+    .book-btn {
+      padding: 6px 12px;
+      font-size: 14px;
+    }
+    .container {
+      width: 95%;
+    }
+  }
+  
