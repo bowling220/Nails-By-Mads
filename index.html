@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nails By Mads</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
   <!-- EmailJS SDK -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script type="text/javascript">
@@ -14,210 +17,357 @@
     })();
   </script>
   <style>
-    /* -----------------------
-       Global & Basic Styles
-    ------------------------- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-    }
-    
-    /* -----------------------
-       Header & Navigation (Desktop)
-    ------------------------- */
-    header {
-      background: #000; /* Dark background */
-    }
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 20px;
-      position: relative;
-    }
-    /* Navigation Links (Desktop) */
-    #navLinks {
-      list-style: none;
-      display: flex;
-      gap: 20px;
-    }
-    #navLinks li a {
-      text-decoration: none;
-      color: #fff;  /* White text */
-      font-size: 16px;
-    }
-    /* Brand */
-    .brand {
-      font-size: 24px;
-      font-weight: bold;
-      color: #fff;  /* White brand text */
-    }
-    /* Book Appointment Button */
-    .book-btn {
-      padding: 8px 16px;
-      font-size: 16px;
-      background-color: #333;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    
-    /* -----------------------
-       Hamburger Menu (Mobile Only)
-    ------------------------- */
-    .menu-toggle {
-      display: none;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 30px;
-      height: 22px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-    }
-    .menu-toggle .bar {
-      height: 3px;
-      width: 100%;
-      background-color: #fff;
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
-    /* Active state (turns into an X) */
-    .menu-toggle.active .bar:nth-child(1) {
-      transform: translateY(9px) rotate(45deg);
-    }
-    .menu-toggle.active .bar:nth-child(2) {
-      opacity: 0;
-    }
-    .menu-toggle.active .bar:nth-child(3) {
-      transform: translateY(-9px) rotate(-45deg);
-    }
-    
-    /* -----------------------
-       Hero Section (unchanged)
-    ------------------------- */
-    .hero-content {
-      padding: 60px 20px;
-      text-align: center;
-      background: url('your-hero-image.jpg') no-repeat center center/cover;
-      color: #fff;
-    }
-    .hero-content h1 {
-      font-size: 36px;
-      margin-bottom: 10px;
-    }
-    .hero-content p {
-      font-size: 18px;
-      margin-bottom: 20px;
-    }
-    .hero-content .cta {
-      padding: 10px 20px;
-      background-color: #fff;
-      color: #333;
-      text-decoration: none;
-      border-radius: 4px;
-      font-size: 16px;
-    }
-    
-    /* -----------------------
-       Modal Styles
-    ------------------------- */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0, 0, 0, 0.5);
-    }
-    .modal-content {
-      background-color: #fff;
-      margin: 100px auto;
-      padding: 20px;
-      border-radius: 8px;
-      max-width: 500px;
-      width: 90%;
-      position: relative;
-    }
-    .modal .close {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 28px;
-      font-weight: bold;
-      color: #aaa;
-      cursor: pointer;
-    }
-    .modal .close:hover {
-      color: #000;
-    }
-    
-    /* -----------------------
-       Cookie Consent
-    ------------------------- */
-    .cookie-consent {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background: #222;
-      color: #fff;
-      text-align: center;
-      padding: 10px;
-      z-index: 2000;
-    }
-    .cookie-consent button {
-      background: #fff;
-      color: #222;
-      border: none;
-      padding: 5px 10px;
-      cursor: pointer;
-      border-radius: 4px;
-      margin-left: 10px;
-    }
-    
-    /* -----------------------
-       Responsive Styles (Mobile)
-    ------------------------- */
-    @media only screen and (max-width: 768px) {
-      /* Show hamburger on mobile */
-      .menu-toggle {
-        display: flex;
-      }
-      /* Hide desktop nav links on mobile by default */
-      #navLinks {
-        display: none;
-        flex-direction: column;
-        gap: 0;
-        position: absolute;
-        top: 60px; /* Adjust based on nav height */
-        left: 0;
-        width: 100%;
-        background: #000;  /* Dark background for dropdown */
-        padding: 10px 0;
-      }
-      #navLinks.active {
-        display: flex;
-      }
-      
-      /* Adjust header layout for mobile:
-         Hamburger on left, brand centered, booking on right */
-      nav {
-        justify-content: space-between;
-      }
-      .brand {
-        font-size: 20px;
-      }
-    }
+   /* -----------------------
+   Global & Basic Styles
+------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: #121212; /* Dark background */
+  color: #e0e0e0;            /* Light text */
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* -----------------------
+   Header & Navigation (Desktop)
+------------------------- */
+header {
+  /* Animated gradient background: deep purple to pink */
+  background: linear-gradient(45deg, #2e003e, #5a007e);
+  animation: gradientShift 20s ease infinite;
+}
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  position: relative;
+}
+/* Navigation Links (Desktop) */
+#navLinks {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+#navLinks li a {
+  text-decoration: none;
+  color: #e0e0e0;  /* Light text */
+  font-size: 16px;
+}
+/* Brand */
+.brand {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffb6c1;  /* Light pink accent */
+}
+
+/* -----------------------
+   Book Appointment Button
+------------------------- */
+.book-btn {
+  padding: 8px 16px;
+  font-size: 25px;
+  background: linear-gradient(45deg, #5a007e, #ff6ec7);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: "Amatic SC", serif;
+  transition: background 0.5s ease-in-out, transform 0.3s ease-in-out;
+}
+.book-btn:hover {
+  background: linear-gradient(45deg, #ff6ec7, #5a007e);
+  transform: scale(1.05);
+}
+
+/* -----------------------
+   Hamburger Menu (Mobile Only)
+------------------------- */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.menu-toggle .bar {
+  height: 3px;
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+/* Active state (turns into an X) */
+.menu-toggle.active .bar:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+.menu-toggle.active .bar:nth-child(2) {
+  opacity: 0;
+}
+.menu-toggle.active .bar:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* -----------------------
+   Hero Section (unchanged background image)
+------------------------- */
+.hero-content {
+  padding: 60px 20px;
+  text-align: center;
+  background: url('your-hero-image.jpg') no-repeat center center/cover;
+  color: #fff;
+}
+.hero-content h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+.hero-content p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.hero-content .cta {
+  padding: 10px 20px;
+  background-color: #ff6ec7;
+  color: #333;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+.hero-content .cta:hover {
+  background-color: #5a007e;
+}
+
+/* -----------------------
+   Modal Styles
+------------------------- */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.modal-content {
+  background-color: #1e1e1e;
+  margin: 100px auto;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+}
+.modal .close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #ff6ec7;
+  cursor: pointer;
+}
+.modal .close:hover {
+  color: #ffb6c1;
+}
+
+/* -----------------------
+   Cookie Consent
+------------------------- */
+.cookie-consent {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #2e003e;
+  color: #e0e0e0;
+  text-align: center;
+  padding: 10px;
+  z-index: 2000;
+}
+.cookie-consent button {
+  background: #5a007e;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-left: 10px;
+  transition: background 0.3s ease;
+}
+.cookie-consent button:hover {
+  background: #ff6ec7;
+}
+
+/* Services Section - Purple-ish background for each service item */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.service-item {
+  background-color: #3e0c56;  /* A purple-ish tone */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Testimonials Section - Purple-ish background for each testimonial */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.testimonial {
+  background-color: #3e0c56;  /* Purple-ish tone */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  color: #fff;  /* Ensure text is readable on dark background */
+}
+
+/* Blog Section - Purple-ish background for each blog post */
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.blog-post {
+  background-color: #3e0c56;  /* Purple-ish tone */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  color: #fff;  /* Ensure text is readable */
+}
+
+.blog-post img {
+  width: 100%;
+  border-radius: 8px 8px 0 0; /* Optional: if you want rounded corners on the top image */
+  margin-bottom: 15px;
+}
+
+/* Contact Form Styles */
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #444;
+  border-radius: 4px;
+  background-color: #2e2e2e;
+  color: #e0e0e0;
+  font-size: 16px;
+}
+
+/* Style placeholder text for better visibility */
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #aaa;
+}
+
+/* Focus styles for accessibility */
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: #ff6ec7;
+}
+
+/* Button Styles */
+.contact-form button {
+  padding: 12px 20px;
+  background-color: #5a007e;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.contact-form button:hover {
+  background-color: #ff6ec7;
+}
+
+
+
+
+
+/* -----------------------
+   Responsive Styles (Mobile)
+------------------------- */
+@media only screen and (max-width: 768px) {
+  /* Show hamburger on mobile */
+  .menu-toggle {
+    display: flex;
+  }
+  /* Hide desktop nav links on mobile by default */
+  #navLinks {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    position: absolute;
+    top: 60px; /* Adjust based on nav height */
+    left: 0;
+    width: 100%;
+    background: #2e003e;  /* Dark background for dropdown */
+    padding: 10px 0;
+  }
+  #navLinks.active {
+    display: flex;
+  }
+  
+  /* Adjust header layout for mobile:
+     Hamburger on left, brand centered, booking on right */
+  nav {
+    justify-content: space-between;
+  }
+  .brand {
+    font-size: 20px;
+  }
+}
+
+/* -----------------------
+   Animation for Background Gradient Shift
+------------------------- */
+@keyframes gradientShift {
+  0% {
+    background: linear-gradient(45deg, #2e003e, #5a007e);
+  }
+  50% {
+    background: linear-gradient(45deg, #5a007e, #ff6ec7);
+  }
+  100% {
+    background: linear-gradient(45deg, #2e003e, #5a007e);
+  }
+}
+
+/* -----------------------
+   Section Background Overrides
+   (Ensures non-white backgrounds for better readability)
+------------------------- */
+.about,
+.services,
+.testimonials,
+.gallery,
+.blog,
+.contact {
+  background-color: #1e1e1e; /* Dark background for content sections */
+  color: #e0e0e0;            /* Light text for contrast */
+  padding: 40px 20px;
+}
   </style>
 </head>
 <body>
@@ -337,13 +487,12 @@
     <h2>Contact Us</h2>
     <div class="contact-info">
       <div class="contact-details">
-        <p><strong>Phone:</strong> (123) 456-7890</p>
-        <p><strong>Email:</strong> info@nailsbymads.com</p>
-        <p><strong>Address:</strong> 1234 Nail St, Beauty City</p>
+        <p><strong>Phone:</strong> (814) 790-3017</p>
+        <p><strong>Email:</strong> madelineborland@gmail.com</p>
+        <p><strong>Address:</strong> 991 Bonnie Brae, Erie, PA 16511</p>
       </div>
       <div class="map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!..." width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-      </div>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2957.455093587321!2d-79.99190932368093!3d42.16194604759452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882d7c3779205351%3A0x1801bae56b356e6d!2s991%20Bonnie%20Brae%2C%20Erie%2C%20PA%2016511!5e0!3m2!1sen!2sus!4v1739991599342!5m2!1sen!2sus" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>      </div>
     </div>
     <form class="contact-form">
       <input type="text" placeholder="Your Name" required>
