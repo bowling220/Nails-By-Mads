@@ -14,7 +14,121 @@
     })();
   </script>
   <style>
-    /* Minimal styling for the modal – adjust as needed */
+    /* -----------------------
+       Global & Basic Styles
+    ------------------------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+    
+    /* -----------------------
+       Header & Navigation (Desktop)
+    ------------------------- */
+    header {
+      background: #000; /* Dark background */
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      position: relative;
+    }
+    /* Navigation Links (Desktop) */
+    #navLinks {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+    #navLinks li a {
+      text-decoration: none;
+      color: #fff;  /* White text */
+      font-size: 16px;
+    }
+    /* Brand */
+    .brand {
+      font-size: 24px;
+      font-weight: bold;
+      color: #fff;  /* White brand text */
+    }
+    /* Book Appointment Button */
+    .book-btn {
+      padding: 8px 16px;
+      font-size: 16px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    /* -----------------------
+       Hamburger Menu (Mobile Only)
+    ------------------------- */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 22px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+    .menu-toggle .bar {
+      height: 3px;
+      width: 100%;
+      background-color: #fff;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    /* Active state (turns into an X) */
+    .menu-toggle.active .bar:nth-child(1) {
+      transform: translateY(9px) rotate(45deg);
+    }
+    .menu-toggle.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle.active .bar:nth-child(3) {
+      transform: translateY(-9px) rotate(-45deg);
+    }
+    
+    /* -----------------------
+       Hero Section (unchanged)
+    ------------------------- */
+    .hero-content {
+      padding: 60px 20px;
+      text-align: center;
+      background: url('your-hero-image.jpg') no-repeat center center/cover;
+      color: #fff;
+    }
+    .hero-content h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+    .hero-content p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+    .hero-content .cta {
+      padding: 10px 20px;
+      background-color: #fff;
+      color: #333;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    
+    /* -----------------------
+       Modal Styles
+    ------------------------- */
     .modal {
       display: none;
       position: fixed;
@@ -32,6 +146,7 @@
       padding: 20px;
       border-radius: 8px;
       max-width: 500px;
+      width: 90%;
       position: relative;
     }
     .modal .close {
@@ -46,14 +161,81 @@
     .modal .close:hover {
       color: #000;
     }
+    
+    /* -----------------------
+       Cookie Consent
+    ------------------------- */
+    .cookie-consent {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: #222;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      z-index: 2000;
+    }
+    .cookie-consent button {
+      background: #fff;
+      color: #222;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      margin-left: 10px;
+    }
+    
+    /* -----------------------
+       Responsive Styles (Mobile)
+    ------------------------- */
+    @media only screen and (max-width: 768px) {
+      /* Show hamburger on mobile */
+      .menu-toggle {
+        display: flex;
+      }
+      /* Hide desktop nav links on mobile by default */
+      #navLinks {
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        position: absolute;
+        top: 60px; /* Adjust based on nav height */
+        left: 0;
+        width: 100%;
+        background: #000;  /* Dark background for dropdown */
+        padding: 10px 0;
+      }
+      #navLinks.active {
+        display: flex;
+      }
+      
+      /* Adjust header layout for mobile:
+         Hamburger on left, brand centered, booking on right */
+      nav {
+        justify-content: space-between;
+      }
+      .brand {
+        font-size: 20px;
+      }
+    }
   </style>
 </head>
 <body>
   <!-- Header with Navigation -->
   <header id="home">
     <nav>
+      <!-- Hamburger Menu (Mobile Only) -->
+      <button class="menu-toggle" id="menuToggle">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      
+      <!-- Brand (Always Visible, centered on mobile) -->
       <div class="brand">Nails By Mads</div>
-      <ul>
+      
+      <!-- Desktop Navigation Links (Visible on Desktop) -->
+      <ul id="navLinks">
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#services">Services</a></li>
@@ -62,7 +244,8 @@
         <li><a href="#blog">Blog</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <!-- Only one button now: Book Appointment -->
+      
+      <!-- Book Appointment Button (Always Visible) -->
       <button id="bookBtn" class="book-btn">Book Appointment</button>
     </nav>
     <div class="inner"></div>
@@ -91,7 +274,7 @@
     </div>
   </div>
 
-  <!-- Cookie Consent (if needed) -->
+  <!-- Cookie Consent -->
   <div id="cookieConsent" class="cookie-consent">
     <p>
       We use cookies to ensure you get the best experience.
@@ -105,11 +288,19 @@
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
     }
-    // Ensure the page always loads at the top
+    // Ensure the page loads at the top
     window.addEventListener('load', () => {
       setTimeout(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }, 0);
+    });
+
+    // Toggle mobile navigation (hamburger)
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+    menuToggle.addEventListener("click", () => {
+      menuToggle.classList.toggle("active");
+      navLinks.classList.toggle("active");
     });
 
     // Appointment Booking Modal functionality
@@ -120,6 +311,11 @@
 
     bookBtn.addEventListener("click", function() {
       bookingModal.style.display = "block";
+      // If mobile nav is open, close it
+      if (navLinks.classList.contains("active")) {
+        navLinks.classList.remove("active");
+        menuToggle.classList.remove("active");
+      }
     });
 
     closeBookingModal.addEventListener("click", function() {
