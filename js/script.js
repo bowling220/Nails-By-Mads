@@ -2,10 +2,11 @@
 if ('scrollRestoration' in history) {
   history.scrollRestoration = 'manual';
 }
+
 // Ensure the page always loads at the top (using a timeout)
 window.addEventListener('load', () => {
   setTimeout(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, 0);
 });
 
@@ -147,4 +148,53 @@ if (localStorage.getItem("cookiesAccepted") === "true") {
 acceptCookies.addEventListener("click", function() {
   cookieConsent.style.display = "none";
   localStorage.setItem("cookiesAccepted", "true");
+});
+
+// Custom Smooth Scrolling Function
+function smoothScrollTo(targetY, duration) {
+  const startY = window.scrollY;
+  const distanceY = targetY - startY;
+  let startTime = null;
+
+  function easeInOutQuad(t) {
+    return t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
+  }
+
+  function animation(currentTime) {
+    if (startTime === null) startTime = currentTime;
+    const timeElapsed = currentTime - startTime;
+    const progress = Math.min(timeElapsed / duration, 1);
+    const easing = easeInOutQuad(progress);
+    window.scrollTo(0, startY + distanceY * easing);
+    if (timeElapsed < duration) {
+      requestAnimationFrame(animation);
+    }
+  }
+  requestAnimationFrame(animation);
+}
+
+// Smooth Scrolling for the "Explore Services" Button
+const exploreServicesBtn = document.querySelector('.hero-content .cta');
+if (exploreServicesBtn) {
+  exploreServicesBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    const targetSection = document.querySelector(this.getAttribute('href'));
+    if (targetSection) {
+      const targetY = targetSection.getBoundingClientRect().top + window.scrollY;
+      smoothScrollTo(targetY, 1500);
+    }
+  });
+}
+
+// Smooth Scrolling for All Navigation Buttons in the Header
+// This targets all <a> elements inside the nav with hrefs that start with "#"
+document.querySelectorAll('nav a[href^="#"]').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    const targetSection = document.querySelector(this.getAttribute('href'));
+    if (targetSection) {
+      const targetY = targetSection.getBoundingClientRect().top + window.scrollY;
+      smoothScrollTo(targetY, 1500);
+    }
+  });
 });

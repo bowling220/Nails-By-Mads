@@ -33,7 +33,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 87%;
     background-image: url('../nails.jpg'); /* Replace with your image path */
     background-size: cover;
     background-position: center center;
@@ -116,9 +116,14 @@
   
   /* About Section */
   .about {
+    background: #fff;      /* Solid background prevents image bleed-through */
+    position: relative;    
+    z-index: 1;            /* Ensures the section appears above the hero image */
+    margin-top: -5vh;      /* Smaller negative margin to pull it up gently */
     padding: 60px 0;
     text-align: center;
   }
+  
   .about p {
     font-size: 18px;
     margin-bottom: 20px;

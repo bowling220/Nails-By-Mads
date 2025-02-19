@@ -3,8 +3,168 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin - Exclusive Nails Salon</title>
-  <link rel="stylesheet" href="css/admin.css">
+  <title>Admin - Nails By Mads</title>
+  <style>
+    /* Global Resets */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f4f4;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+    }
+    /* Admin Login Styles */
+    #loginContainer {
+      max-width: 400px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    #loginContainer h2 {
+      margin-bottom: 20px;
+    }
+    #loginForm input[type="email"],
+    #loginForm input[type="password"] {
+      width: 100%;
+      padding: 12px 15px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    #loginForm button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      background: #333;
+      color: #fff;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #loginForm button:hover {
+      background: #555;
+    }
+    .error-message {
+      color: red;
+      margin-top: 10px;
+    }
+    /* Admin Content Styles */
+    #adminContent {
+      max-width: 1000px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    #adminContent header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    #adminContent header h1 {
+      font-size: 24px;
+    }
+    #logoutBtn {
+      padding: 10px 15px;
+      background: #e74c3c;
+      border: none;
+      color: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    #logoutBtn:hover {
+      background: #c0392b;
+    }
+    /* Calendar Styles */
+    #calendar {
+      margin: 0 auto;
+      max-width: 900px;
+    }
+    /* Modal Styles */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: 100px auto;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 500px;
+      position: relative;
+    }
+    .modal-content h2 {
+      margin-bottom: 15px;
+    }
+    .modal-content p {
+      margin-bottom: 10px;
+    }
+    .modal-content label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+    .modal-content input[type="date"],
+    .modal-content input[type="time"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .modal-buttons {
+      display: flex;
+      justify-content: space-between;
+    }
+    .modal-buttons button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    #rescheduleBtn {
+      background: #3498db;
+      color: #fff;
+    }
+    #rescheduleBtn:hover {
+      background: #2980b9;
+    }
+    #cancelBtn {
+      background: #e74c3c;
+      color: #fff;
+    }
+    #cancelBtn:hover {
+      background: #c0392b;
+    }
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #aaa;
+      cursor: pointer;
+    }
+    .close:hover,
+    .close:focus {
+      color: #000;
+    }
+  </style>
   <!-- FullCalendar CSS (CDN) -->
   <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.7/index.global.min.css" rel="stylesheet">
 </head>
