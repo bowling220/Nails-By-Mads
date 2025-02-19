@@ -35,11 +35,7 @@ body {
 /* -----------------------
    Header & Navigation (Desktop)
 ------------------------- */
-header {
-  /* Animated gradient background: deep purple to pink */
-  background: linear-gradient(45deg, #2e003e, #5a007e);
-  animation: gradientShift 20s ease infinite;
-}
+
 nav {
   display: flex;
   align-items: center;
@@ -116,13 +112,10 @@ nav {
   transform: translateY(-9px) rotate(-45deg);
 }
 
-/* -----------------------
-   Hero Section (unchanged background image)
-------------------------- */
+
 .hero-content {
   padding: 60px 20px;
   text-align: center;
-  background: url('your-hero-image.jpg') no-repeat center center/cover;
   color: #fff;
 }
 .hero-content h1 {
@@ -135,7 +128,7 @@ nav {
 }
 .hero-content .cta {
   padding: 10px 20px;
-  background-color: #ff6ec7;
+  background-color: #f83aaf;
   color: #333;
   text-decoration: none;
   border-radius: 4px;
@@ -143,7 +136,7 @@ nav {
   transition: background 0.3s ease;
 }
 .hero-content .cta:hover {
-  background-color: #5a007e;
+  background-color: #a602e7;
 }
 
 /* -----------------------
@@ -302,9 +295,6 @@ nav {
 }
 
 
-
-
-
 /* -----------------------
    Responsive Styles (Mobile)
 ------------------------- */
@@ -354,6 +344,30 @@ nav {
   }
 }
 
+.about-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap; /* ensures it stays responsive */
+}
+
+.profile-img {
+  width: 150px; /* adjust size as needed */
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto; /* centers the image horizontally */
+  border: 3px solid #ddd; /* optional border */
+}
+
+
+
+.about.container {
+  margin-top: -75px; /* Adjust this value as needed */
+}
+
+
 /* -----------------------
    Section Background Overrides
    (Ensures non-white backgrounds for better readability)
@@ -382,8 +396,11 @@ nav {
       </button>
       
       <!-- Brand (Always Visible, centered on mobile) -->
-      <div class="brand">Nails By Mads</div>
-      
+      <div class="brand">
+        <img src="output.png" alt="Logo" style="vertical-align: middle; margin-right: 10px; max-height: 40px;">
+        Nails By Mads
+      </div>
+            
       <!-- Desktop Navigation Links (Visible on Desktop) -->
       <ul id="navLinks">
         <li><a href="#home">Home</a></li>
@@ -406,13 +423,17 @@ nav {
     </div>
   </header>
 
-  <!-- About Section -->
-  <section id="about" class="about container">
-    <h2>About Us</h2>
+<!-- About Section -->
+<section id="about" class="about container">
+  <h2>About Me</h2>
+  <div class="about-content">
+    <img src="profile.jpg" alt="Profile Image" class="profile-img">
     <p>
-      At Nails By Mads, we offer high-quality nail care services in a luxurious and relaxing environment. Our skilled technicians are dedicated to providing exceptional service and personalized care to help you look and feel your best.
+      At Nails By Mads, I offer high-quality nail care services in a luxurious and relaxing environment. I'm a skilled technician and I'm dedicated to providing exceptional service and personalized care to help you look and feel your best.
     </p>
-  </section>
+  </div>
+</section>
+
 
   <!-- Services Section -->
   <section id="services" class="services container">
@@ -463,24 +484,23 @@ nav {
     </div>
   </section>
 
-  <!-- Blog Section -->
-  <section id="blog" class="blog container">
-    <h2>Latest News & Tips</h2>
-    <div class="blog-grid">
-      <article class="blog-post">
-        <img src="https://via.placeholder.com/400x250?text=Blog+Image+1" alt="Blog Post 1">
-        <h3>Top Nail Trends of 2025</h3>
-        <p>Discover the hottest nail trends that are taking over salons this year.</p>
-        <a href="#">Read More</a>
-      </article>
-      <article class="blog-post">
-        <img src="https://via.placeholder.com/400x250?text=Blog+Image+2" alt="Blog Post 2">
-        <h3>Nail Care Tips for Healthy Nails</h3>
-        <p>Learn expert tips on how to maintain healthy, beautiful nails at home.</p>
-        <a href="#">Read More</a>
-      </article>
-    </div>
-  </section>
+<!-- Blog Section -->
+<section id="blog" class="blog container">
+  <h2>Latest News & Tips</h2>
+  <div class="blog-grid">
+    <article class="blog-post">
+      <img src="https://via.placeholder.com/400x250?text=Blog+Image+1" alt="Blog Post 1">
+      <h3>Top Nail Trends of 2025</h3>
+      <p>Discover the hottest nail trends that are taking over salons this year.</p>
+    </article>
+    <article class="blog-post">
+      <img src="https://via.placeholder.com/400x250?text=Blog+Image+2" alt="Blog Post 2">
+      <h3>Nail Care Tips for Healthy Nails</h3>
+      <p>Learn expert tips on how to maintain healthy, beautiful nails at home.</p>
+    </article>
+  </div>
+</section>
+
 
   <!-- Contact Section -->
   <section id="contact" class="contact container">
