@@ -368,6 +368,65 @@ nav {
 }
 
 
+.footer {
+  width: 100%;
+  background: #000;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.footer .footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #444;
+  padding-bottom: 10px;
+}
+
+.footer-left {
+  flex: 1;
+  text-align: left;
+}
+
+.footer-left h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.footer-center {
+  flex: 1;
+  text-align: center;
+}
+
+.footer-logo {
+  max-height: 50px;
+  vertical-align: middle;
+}
+
+.footer-right {
+  flex: 1;
+  text-align: right;
+}
+
+.social-media a img {
+  width: 24px;
+  height: 24px;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+
+.footer p {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+
+
+
 /* -----------------------
    Section Background Overrides
    (Ensures non-white backgrounds for better readability)
@@ -388,20 +447,13 @@ nav {
   <!-- Header with Navigation -->
   <header id="home">
     <nav>
-      <!-- Hamburger Menu (Mobile Only) -->
-      <button class="menu-toggle" id="menuToggle">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </button>
-      
-      <!-- Brand (Always Visible, centered on mobile) -->
+      <!-- Brand with Logo -->
       <div class="brand">
         <img src="output.png" alt="Logo" style="vertical-align: middle; margin-right: 10px; max-height: 40px;">
         Nails By Mads
       </div>
-            
-      <!-- Desktop Navigation Links (Visible on Desktop) -->
+      
+      <!-- Navigation Links -->
       <ul id="navLinks">
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
@@ -412,7 +464,7 @@ nav {
         <li><a href="#contact">Contact</a></li>
       </ul>
       
-      <!-- Book Appointment Button (Always Visible) -->
+      <!-- Book Appointment Button -->
       <button id="bookBtn" class="book-btn">Book Appointment</button>
     </nav>
     <div class="inner"></div>
@@ -423,17 +475,16 @@ nav {
     </div>
   </header>
 
-<!-- About Section -->
-<section id="about" class="about container">
-  <h2>About Me</h2>
-  <div class="about-content">
-    <img src="profile.jpg" alt="Profile Image" class="profile-img">
-    <p>
-      At Nails By Mads, I offer high-quality nail care services in a luxurious and relaxing environment. I'm a skilled technician and I'm dedicated to providing exceptional service and personalized care to help you look and feel your best.
-    </p>
-  </div>
-</section>
-
+  <!-- About Section -->
+  <section id="about" class="about container">
+    <h2>About Me</h2>
+    <div class="about-content">
+      <img src="profile.jpg" alt="Profile Image" class="profile-img">
+      <p>
+        At Nails By Mads, I offer high-quality nail care services in a luxurious and relaxing environment. I'm a skilled technician and I'm dedicated to providing exceptional service and personalized care to help you look and feel your best.
+      </p>
+    </div>
+  </section>
 
   <!-- Services Section -->
   <section id="services" class="services container">
@@ -484,23 +535,22 @@ nav {
     </div>
   </section>
 
-<!-- Blog Section -->
-<section id="blog" class="blog container">
-  <h2>Latest News & Tips</h2>
-  <div class="blog-grid">
-    <article class="blog-post">
-      <img src="https://via.placeholder.com/400x250?text=Blog+Image+1" alt="Blog Post 1">
-      <h3>Top Nail Trends of 2025</h3>
-      <p>Discover the hottest nail trends that are taking over salons this year.</p>
-    </article>
-    <article class="blog-post">
-      <img src="https://via.placeholder.com/400x250?text=Blog+Image+2" alt="Blog Post 2">
-      <h3>Nail Care Tips for Healthy Nails</h3>
-      <p>Learn expert tips on how to maintain healthy, beautiful nails at home.</p>
-    </article>
-  </div>
-</section>
-
+  <!-- Blog Section -->
+  <section id="blog" class="blog container">
+    <h2>Latest News & Tips</h2>
+    <div class="blog-grid">
+      <article class="blog-post">
+        <img src="https://via.placeholder.com/400x250?text=Blog+Image+1" alt="Blog Post 1">
+        <h3>Top Nail Trends of 2025</h3>
+        <p>Discover the hottest nail trends that are taking over salons this year.</p>
+      </article>
+      <article class="blog-post">
+        <img src="https://via.placeholder.com/400x250?text=Blog+Image+2" alt="Blog Post 2">
+        <h3>Nail Care Tips for Healthy Nails</h3>
+        <p>Learn expert tips on how to maintain healthy, beautiful nails at home.</p>
+      </article>
+    </div>
+  </section>
 
   <!-- Contact Section -->
   <section id="contact" class="contact container">
@@ -512,7 +562,8 @@ nav {
         <p><strong>Address:</strong> 991 Bonnie Brae, Erie, PA 16511</p>
       </div>
       <div class="map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2957.455093587321!2d-79.99190932368093!3d42.16194604759452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882d7c3779205351%3A0x1801bae56b356e6d!2s991%20Bonnie%20Brae%2C%20Erie%2C%20PA%2016511!5e0!3m2!1sen!2sus!4v1739991599342!5m2!1sen!2sus" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>      </div>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2957.455093587321!2d-79.99190932368093!3d42.16194604759452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882d7c3779205351%3A0x1801bae56b356e6d!2s991%20Bonnie%20Brae%2C%20Erie%2C%20PA%2016511!5e0!3m2!1sen!2sus!4v1739991599342!5m2!1sen!2sus" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
     </div>
     <form class="contact-form">
       <input type="text" placeholder="Your Name" required>
@@ -530,7 +581,7 @@ nav {
       <form id="bookingForm" class="booking-form">
         <input type="text" placeholder="Your Name" id="name" required>
         <input type="email" placeholder="Your Email" id="email" required>
-      <h5>Date</h5>
+        <h5>Date</h5>
         <input type="date" id="date" required>
         <h5>Time</h5>
         <input type="time" id="time" required>
@@ -539,13 +590,32 @@ nav {
     </div>
   </div>
 
-  <!-- Cookie Consent -->
   <div id="cookieConsent" class="cookie-consent">
     <p>
       We use cookies to ensure you get the best experience.
       <button id="acceptCookies">Accept</button>
     </p>
   </div>
+
+  <!-- Footer Section (Full Width) -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-left">
+        <h2>Nails By Mads</h2>
+      </div>
+      <div class="footer-center">
+        <img src="output.png" alt="Logo" class="footer-logo">
+      </div>
+      <div class="footer-right">
+        <div class="social-media">
+          <a href="#" target="_blank"><img src="facebook-icon.png" alt="Facebook"></a>
+          <a href="#" target="_blank"><img src="instagram-icon.png" alt="Instagram"></a>
+          <a href="#" target="_blank"><img src="twitter-icon.png" alt="Twitter"></a>
+        </div>
+      </div>
+    </div>
+    <p>&copy; 2025 Nails By Mads. All rights reserved.</p>
+  </footer>
 
   <!-- Main Script -->
   <script>
@@ -687,16 +757,27 @@ nav {
       requestAnimationFrame(animation);
     }
 
-    // Cookie Consent
+   
     const cookieConsent = document.getElementById("cookieConsent");
-    const acceptCookies = document.getElementById("acceptCookies");
-    if (localStorage.getItem("cookiesAccepted") === "true") {
-      cookieConsent.style.display = "none";
-    }
-    acceptCookies.addEventListener("click", function() {
-      cookieConsent.style.display = "none";
-      localStorage.setItem("cookiesAccepted", "true");
-    });
+  const acceptCookies = document.getElementById("acceptCookies");
+
+  // Debug logs
+  console.log("Cookie consent element:", cookieConsent);
+  console.log("Accept button:", acceptCookies);
+
+  // Check if cookies have already been accepted
+  if (localStorage.getItem("cookiesAccepted")) {
+    cookieConsent.style.display = "none";
+  }
+
+  acceptCookies.addEventListener("click", function() {
+    console.log("Accept button clicked");
+    localStorage.setItem("cookiesAccepted", "true");
+    cookieConsent.style.display = "none";
+  });
+
+
+
   </script>
 </body>
 </html>
