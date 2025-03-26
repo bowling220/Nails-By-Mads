@@ -238,8 +238,82 @@
 }
 
 
+/* Blog Grid Layout */
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Show 2 posts per row */
+  gap: 20px;
+  max-width: 1000px; /* Increased max-width to accommodate two posts */
+  margin: 0 auto;
+  padding: 0 20px;
+}
 
+/* Individual Blog Post Card */
+.blog-post {
+  background: linear-gradient(135deg, #6a1b9a, #4a148c);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+  height: 100%; /* Ensure equal height */
+  display: flex;
+  flex-direction: column;
+}
 
+/* Post Header with Author Info */
+.blog-post-meta {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.blog-post-meta p {
+  font-size: 14px;
+  color: #ffffff;
+  margin: 0;
+}
+
+/* Post Image */
+.blog-post img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Post Content */
+.blog-post-content {
+  padding: 16px;
+}
+
+.blog-post-content h3 {
+  font-size: 18px;
+  color: #ff6ec7;
+  margin-bottom: 8px;
+}
+
+.blog-post-content p {
+  font-size: 15px;
+  color: #ffffff;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Interaction Area */
+.blog-post::after {
+  content: '';
+  display: block;
+  padding: 12px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 14px;
+  color: #ff6ec7;
+}
+
+/* Hover Effect */
+.blog-post:hover {
+  transform: translateY(-4px);
+}
 
 /* Override any white backgrounds for these sections */
 .services, 
@@ -384,7 +458,344 @@
         padding: 6px 12px;
         font-size: 12px;
       }
+      .blog-grid {
+        grid-template-columns: 1fr; /* Stack posts on mobile */
+        max-width: 500px;
+      }
     }
+/* Prices Section – Shiny Purple Style */
+.prices {
+  background: #5a007e; /* Keep overall section background black */
+  color: #F2F2F7; /* Light text color */
+  padding: 60px 20px;
+  margin: 20px auto;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.prices h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #ffffff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.prices-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.price-item {
+  position: relative;
+  background: linear-gradient(135deg, #6a1b9a, #4a148c); /* Website's purple gradient */
+  border-radius: 12px;
+  width: 250px;
+  padding: 20px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.price-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Shiny overlay effect */
+.price-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transform: skewX(-25deg);
+  transition: left 0.5s ease;
+}
+
+.price-item:hover::before {
+  left: 100%;
+}
+
+.price-item h3 {
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.price-item p {
+  font-size: 18px;
+  margin: 0;
+}
+
+/* Modal Styles */
+.modal {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  display: none; /* Only one display property */
+}
+
+.modal-content {
+  background: linear-gradient(135deg, #6a1b9a, #4a148c);
+  padding: 25px 30px;
+  border-radius: 15px;
+  width: 95%;
+  max-width: 600px;
+  max-height: 90vh;
+  color: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+  position: relative;
+  transform: none;
+  margin: auto;
+}
+
+.close {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  font-size: 28px;
+  cursor: pointer;
+  color: #ffffff;
+  transition: color 0.3s ease;
+}
+
+.close:hover {
+  color: #ff6ec7;
+}
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.form-row {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.form-field {
+  margin-bottom: 6px;
+  flex: 1;
+}
+
+/* Full width for single fields */
+.form-field.full-width {
+  width: 100%;
+}
+
+/* Half width for split fields */
+.form-field.half-width {
+  width: calc(50% - 4px); /* 4px accounts for the gap */
+}
+
+.form-field label {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.booking-form input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.booking-hours {
+  margin: 12px 0;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hours-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.hours-row {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.day-hours {
+  position: relative;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  text-align: center;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Full width style */
+.day-hours.full-width {
+  width: 100%;
+}
+
+/* Half width style */
+.day-hours.half-width {
+  flex: 1;
+}
+
+/* Update the animated border effect */
+.day-hours::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 8px;
+  padding: 2px;
+  background: linear-gradient(
+    45deg,
+    #ff6ec7,
+    #7366ff,
+    #ff6ec7
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  background-size: 200% 200%;
+  animation: borderAnimation 3s linear infinite;
+}
+
+.day-hours:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 110, 199, 0.2);
+}
+
+.day-hours strong {
+  display: block;
+  color: #ff6ec7;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.day-hours span {
+  font-size: 13px;
+  color: #ffffff;
+}
+
+@keyframes borderAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.booking-form button {
+  padding: 10px;
+  background: linear-gradient(45deg, #ff6ec7, #5a007e);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.booking-form button:hover {
+  transform: scale(1.02);
+  background: linear-gradient(45deg, #5a007e, #ff6ec7);
+}
+
+/* Add scrollbar styling */
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+/* Add these styles to your existing CSS */
+.required {
+  color: #ff4081;
+  margin-left: 2px;
+}
+
+#notes {
+  height: 40px;
+  min-height: unset;
+  resize: none;
+}
+
+.booking-form p {
+  margin: 2px 0;
+  line-height: 1.2;
+}
+
+/* Update the body style when modal is open */
+body.modal-open {
+  overflow: hidden; /* Prevent background scrolling */
+}
+
+/* Show the modal with flex when it's active */
+.modal.active {
+  display: flex;
+}
+
+.contact-form button {
+  padding: 10px;
+  background: linear-gradient(45deg, #ff6ec7, #5a007e);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  width: 100%;
+}
+
+.contact-form button:hover {
+  transform: scale(1.02);
+  background: linear-gradient(45deg, #5a007e, #ff6ec7);
+}
+
   </style>
 </head>
 <body>
@@ -410,6 +821,7 @@
         <li><a href="#about">About</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#prices">Prices</a></li>
         <li><a href="#gallery">Gallery</a></li>
         <li><a href="#blog">Inspos</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -459,6 +871,29 @@
       </div>
     </div>
   </section>
+<!-- Prices Section -->
+<section id="prices" class="prices container">
+  <h2>Prices</h2>
+  <div class="prices-grid">
+    <div class="price-item">
+      <h3>Base & Adhesive</h3>
+      <p>$20</p>
+    </div>
+    <div class="price-item">
+      <h3>Nail Art</h3>
+      <p>$30</p>
+    </div>
+    <div class="price-item">
+      <h3>Gems and Chrome</h3>
+      <p>$40</p>
+    </div>
+    <div class="price-item">
+      <h3>Removal</h3>
+      <p>$25</p>
+    </div>
+  </div>
+</section>
+
 
   <!-- Testimonials Section -->
   <section id="testimonials" class="testimonials container">
@@ -486,26 +921,40 @@
     </div>
   </section>
 
-  <!-- Blog Section -->
-  <section id="blog" class="blog container">
-    <h2>Some Favorites</h2>
-    <div class="blog-grid">
-      <article class="blog-post">
-        <img src="post1.jpg" alt="Blog Post 1">
+<!-- Blog Section -->
+<section id="blog" class="blog container">
+  <h2>Some Favorites</h2>
+  <div class="blog-grid">
+    <article class="blog-post">
+      <img src="post1.jpg" alt="Blog Post 1">
+      <div class="blog-post-meta">
+        <p>By Madie Borland - <time datetime="2025-06-01">February 20, 2025</time></p>
+      </div>
+      <div class="blog-post-content">
         <h3>Blooming Hawaiian Flower</h3>
-        <p>This cute detailed hawaiian flower is my favorite flower to do on nails. Perfect for summer!</p>
-      </article>
-      <article class="blog-post">
-        <img src="post2.jpg" alt="Blog Post 2">
+        <p>This cute detailed Hawaiian flower is my favorite to do on nails. Perfect for summer!</p>
+      </div>
+
+    </article>
+    <article class="blog-post">
+      <img src="post2.jpg" alt="Blog Post 2">
+      <div class="blog-post-meta">
+        <p>By Madie Borland - <time datetime="2025-06-05">February 20, 2025</time></p>
+      </div>
+      <div class="blog-post-content">
         <h3>Blooming Gel</h3>
-        <p>Blooming gel makes a streched blooming effect and can be used in many different designs. Definitely one of my favorites!</p>
-      </article>
-    </div>
-  </section>
+        <p>Blooming gel creates a stretched blooming effect and can be used in various designs. Definitely one of my favorites!</p>
+      </div>
+   
+    </article>
+  </div>
+</section>
+
+
 
   <!-- Contact Section -->
   <section id="contact" class="contact container">
-    <h2>Contact Us</h2>
+    <h2>Contact Me</h2>
     <div class="contact-info">
       <div class="contact-details">
         <p><strong>Phone:</strong> (814) 790-3017</p>
@@ -527,16 +976,79 @@
   <div id="bookingModal" class="modal">
     <div class="modal-content">
       <span class="close" id="closeBookingModal">&times;</span>
-      <h2>Book an Appointment</h2>
-      <h4>You will be required to sign a consent form upon arrival.</h4>
+      <h2 style="font-size: 24px; margin-bottom: 15px; text-align: center;">Book an Appointment</h2>
+      
+      <div class="booking-hours">
+        <h3 style="font-size: 16px; margin: 0 auto 8px; color: #ff6ec7; text-align: center; display: flex; justify-content: center; align-items: center;">Business Hours</h3>
+        <div class="hours-grid">
+          <!-- Full width row for Monday-Friday -->
+          <div class="hours-row">
+            <div class="day-hours full-width">
+              <strong>Mon-Fri</strong>
+              <span>10AM-6PM</span>
+            </div>
+          </div>
+          <!-- Half width row for Saturday and Sunday -->
+          <div class="hours-row">
+            <div class="day-hours half-width">
+              <strong>Saturday</strong>
+              <span>By Appt</span>
+            </div>
+            <div class="day-hours half-width">
+              <strong>Sunday</strong>
+              <span>Closed</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <form id="bookingForm" class="booking-form">
-        <input type="text" placeholder="Your Name" id="name" required>
-        <input type="email" placeholder="Your Email" id="email" required>
-        <h5>Date</h5>
-        <input type="date" id="date" required>
-        <h5>Time</h5>
-        <input type="time" id="time" required>
-        <button type="submit">Book Now</button>
+        <!-- Full width field -->
+        <div class="form-field full-width">
+          <label for="name">Name <span class="required">*</span></label>
+          <input type="text" id="name" required>
+        </div>
+        
+        <!-- Split fields into two columns -->
+        <div class="form-row">
+          <div class="form-field">
+            <label for="email">Email <span class="required">*</span></label>
+            <input type="email" id="email" required>
+          </div>
+          
+          <div class="form-field">
+            <label for="phone">Phone Number <span class="required">*</span></label>
+            <input type="tel" id="phone" required>
+          </div>
+        </div>
+        
+        <!-- Split fields into two columns -->
+        <div class="form-row">
+          <div class="form-field">
+            <label for="date">Date <span class="required">*</span></label>
+            <input type="date" id="date" required>
+          </div>
+          
+          <div class="form-field">
+            <label for="time">Time <span class="required">*</span></label>
+            <input type="time" id="time" min="10:00" max="18:00" required>
+          </div>
+        </div>
+        
+        <!-- Full width field -->
+        <div class="form-field full-width">
+          <label for="notes">Special Requests</label>
+          <textarea id="notes" rows="2"></textarea>
+        </div>
+        
+        <p style="font-size: 12px; opacity: 0.8; margin-top: 8px;">
+          <span class="required">*</span> Required fields
+        </p>
+        <p style="font-size: 12px; opacity: 0.8;">
+          Note: Consent form signature required upon arrival
+        </p>
+        
+        <button type="submit" style="margin-top: 12px;">Book Now</button>
       </form>
     </div>
   </div>
@@ -595,20 +1107,24 @@
     const closeBookingModal = document.getElementById("closeBookingModal");
     const bookingForm = document.getElementById("bookingForm");
 
+    const body = document.body;
+
     bookBtn.addEventListener("click", function() {
-      bookingModal.style.display = "block";
-      // If mobile nav is open, close it
+      bookingModal.classList.add('active');
+      body.classList.add('modal-open');
       if (navLinks.classList.contains("active")) {
         navLinks.classList.remove("active");
         menuToggle.classList.remove("active");
       }
     });
     closeBookingModal.addEventListener("click", function() {
-      bookingModal.style.display = "none";
+      bookingModal.classList.remove('active');
+      body.classList.remove('modal-open');
     });
     window.addEventListener("click", function(e) {
       if (e.target === bookingModal) {
-        bookingModal.style.display = "none";
+        bookingModal.classList.remove('active');
+        body.classList.remove('modal-open');
       }
     });
 
@@ -645,7 +1161,8 @@
         });
       alert("Your appointment has been booked! A confirmation email has been sent.");
       bookingForm.reset();
-      bookingModal.style.display = "none";
+      bookingModal.classList.remove('active');
+      body.classList.remove('modal-open');
     });
 
     // Smooth Scrolling for "Explore Services" Button and Navigation Links
