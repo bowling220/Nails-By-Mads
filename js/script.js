@@ -1,165 +1,113 @@
-// Disable automatic scroll restoration if supported
 if ('scrollRestoration' in history) {
   history.scrollRestoration = 'manual';
 }
-
-// Ensure the page always loads at the top (using a timeout)
 window.addEventListener('load', () => {
   setTimeout(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, 0);
 });
 
-// Import Firebase modules from CDN (Firebase v9+ Modular SDK)
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
-import { 
-  getFirestore, 
-  collection, 
-  addDoc, 
-  getDocs,
-  query,
-  where
-} from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js";
-
-// Firebase configuration (replace these values with your own Firebase project's config)
-const firebaseConfig = {
-  apiKey: "AIzaSyD4xCq8DWbttfXmQAB_LGeQoWxfzZMhuiQ",
-  authDomain: "maddieswebsite-b70df.firebaseapp.com",
-  projectId: "maddieswebsite-b70df",
-  storageBucket: "maddieswebsite-b70df.firebasestorage.app",
-  messagingSenderId: "243806361324",
-  appId: "1:243806361324:web:bd2325d3288f1ec4ecf7c9",
-  measurementId: "G-MYHEQRVT1C"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-// Generate and store a unique device ID if not already present
-let deviceID = localStorage.getItem("deviceID");
-if (!deviceID) {
-  deviceID = 'device-' + Date.now() + '-' + Math.floor(Math.random() * 1000000);
-  localStorage.setItem("deviceID", deviceID);
-}
-
-// Scroll Zoom Effect for the Header Background
-const inner = document.querySelector(".inner");
-window.addEventListener("scroll", function() {
-  let scrollY = window.pageYOffset;
-  let scaleFactor = 1 + scrollY / window.innerHeight;
-  inner.style.transform = `scale(${scaleFactor})`;
+// Toggle Hamburger Menu on Mobile
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+menuToggle.addEventListener("click", () => {
+  menuToggle.classList.toggle("active");
+  navLinks.classList.toggle("active");
 });
 
-// Appointment Booking Modal
+// Appointment Booking Modal Functionality
 const bookingModal = document.getElementById("bookingModal");
 const bookBtn = document.getElementById("bookBtn");
-const closeModal = document.querySelector(".modal .close");
-const bookingForm = document.querySelector(".booking-form");
+const closeBookingModal = document.getElementById("closeBookingModal");
+const bookingForm = document.getElementById("bookingForm");
+
+const body = document.body;
 
 bookBtn.addEventListener("click", function() {
-  bookingModal.style.display = "block";
+  bookingModal.classList.add('active');
+  body.classList.add('modal-open');
+  if (navLinks.classList.contains("active")) {
+    navLinks.classList.remove("active");
+    menuToggle.classList.remove("active");
+  }
 });
-
-closeModal.addEventListener("click", function() {
-  bookingModal.style.display = "none";
+closeBookingModal.addEventListener("click", function() {
+  bookingModal.classList.remove('active');
+  body.classList.remove('modal-open');
 });
-
 window.addEventListener("click", function(e) {
   if (e.target === bookingModal) {
-    bookingModal.style.display = "none";
+    bookingModal.classList.remove('active');
+    body.classList.remove('modal-open');
   }
 });
 
-// Save appointment to Firestore when the booking form is submitted
-bookingForm.addEventListener("submit", async function(e) {
+// Send Emails on Appointment Booking using EmailJS
+bookingForm.addEventListener("submit", function(e) {
   e.preventDefault();
-  const name = bookingForm.querySelector('input[type="text"]').value;
-  const email = bookingForm.querySelector('input[type="email"]').value;
-  const date = bookingForm.querySelector('input[type="date"]').value;
-  const time = bookingForm.querySelector('input[type="time"]').value;
-
-  // Include the deviceID so we know which device booked this appointment
-  const appointment = { name, email, date, time, deviceID: deviceID, timestamp: Date.now() };
-
-  try {
-    // Save the appointment in the "appointments" collection in Firestore
-    await addDoc(collection(db, "appointments"), appointment);
-    alert("Your appointment has been booked!");
-  } catch (error) {
-    console.error("Error adding document: ", error);
-    alert("There was an error booking your appointment. Please try again later.");
-  }
-
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const date = document.getElementById("date").value;
+  const time = document.getElementById("time").value;
+  const templateParamsUser = {
+    user_name: name,
+    user_email: email,
+    appointment_date: date,
+    appointment_time: time
+  };
+  emailjs.send("service_3nsu0pj", "template_m1blb99", templateParamsUser)
+    .then((response) => {
+      console.log("User confirmation email sent!", response.status, response.text);
+    }, (error) => {
+      console.error("Error sending user confirmation email:", error);
+    });
+  const templateParamsAdmin = {
+    user_name: name,
+    user_email: email,
+    appointment_date: date,
+    appointment_time: time
+  };
+  emailjs.send("service_3nsu0pj", "template_3pn5nga", templateParamsAdmin)
+    .then((response) => {
+      console.log("Admin notification email sent!", response.status, response.text);
+    }, (error) => {
+      console.error("Error sending admin notification email:", error);
+    });
+  alert("Your appointment has been booked! A confirmation email has been sent.");
   bookingForm.reset();
-  bookingModal.style.display = "none";
+  bookingModal.classList.remove('active');
+  body.classList.remove('modal-open');
 });
 
-// Schedule Modal (View Appointments)
-// NOTE: In a production app, you would secure this data. For demo purposes, we load only the appointments for this device.
-const scheduleModal = document.getElementById("scheduleModal");
-const viewScheduleBtn = document.getElementById("viewScheduleBtn");
-const closeSchedule = document.getElementById("closeSchedule");
-const appointmentsList = document.getElementById("appointmentsList");
-
-viewScheduleBtn.addEventListener("click", async function() {
-  appointmentsList.innerHTML = "";
-  try {
-    // Query Firestore for appointments where deviceID equals the current deviceID
-    const appointmentsQuery = query(collection(db, "appointments"), where("deviceID", "==", deviceID));
-    const querySnapshot = await getDocs(appointmentsQuery);
-    if (querySnapshot.empty) {
-      appointmentsList.innerHTML = "<p>No appointments scheduled on this device.</p>";
-    } else {
-      const list = document.createElement("ul");
-      querySnapshot.forEach((doc) => {
-        const appData = doc.data();
-        const li = document.createElement("li");
-        li.innerHTML = `<strong>${appData.name}</strong> - ${appData.email} - ${appData.date} at ${appData.time}`;
-        list.appendChild(li);
-      });
-      appointmentsList.appendChild(list);
+// Smooth Scrolling for "Explore Services" Button and Navigation Links
+const exploreServicesBtn = document.querySelector('.hero-content .cta');
+if (exploreServicesBtn) {
+  exploreServicesBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    const targetSection = document.querySelector(this.getAttribute('href'));
+    if (targetSection) {
+      const targetY = targetSection.getBoundingClientRect().top + window.scrollY;
+      smoothScrollTo(targetY, 1500);
     }
-  } catch (error) {
-    console.error("Error fetching appointments: ", error);
-    appointmentsList.innerHTML = "<p>Error loading appointments.</p>";
-  }
-  scheduleModal.style.display = "block";
-});
-
-closeSchedule.addEventListener("click", function() {
-  scheduleModal.style.display = "none";
-});
-
-window.addEventListener("click", function(e) {
-  if (e.target === scheduleModal) {
-    scheduleModal.style.display = "none";
-  }
-});
-
-// Cookie Consent - Check and save acceptance to localStorage
-const cookieConsent = document.getElementById("cookieConsent");
-const acceptCookies = document.getElementById("acceptCookies");
-
-if (localStorage.getItem("cookiesAccepted") === "true") {
-  cookieConsent.style.display = "none";
+  });
 }
-
-acceptCookies.addEventListener("click", function() {
-  cookieConsent.style.display = "none";
-  localStorage.setItem("cookiesAccepted", "true");
+document.querySelectorAll('nav a[href^="#"]').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    const targetSection = document.querySelector(this.getAttribute('href'));
+    if (targetSection) {
+      const targetY = targetSection.getBoundingClientRect().top + window.scrollY;
+      smoothScrollTo(targetY, 1500);
+    }
+  });
 });
-
-// Custom Smooth Scrolling Function
 function smoothScrollTo(targetY, duration) {
   const startY = window.scrollY;
   const distanceY = targetY - startY;
   let startTime = null;
-
   function easeInOutQuad(t) {
     return t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
   }
-
   function animation(currentTime) {
     if (startTime === null) startTime = currentTime;
     const timeElapsed = currentTime - startTime;
@@ -173,28 +121,13 @@ function smoothScrollTo(targetY, duration) {
   requestAnimationFrame(animation);
 }
 
-// Smooth Scrolling for the "Explore Services" Button
-const exploreServicesBtn = document.querySelector('.hero-content .cta');
-if (exploreServicesBtn) {
-  exploreServicesBtn.addEventListener('click', function(e) {
-    e.preventDefault();
-    const targetSection = document.querySelector(this.getAttribute('href'));
-    if (targetSection) {
-      const targetY = targetSection.getBoundingClientRect().top + window.scrollY;
-      smoothScrollTo(targetY, 1500);
-    }
-  });
+// Cookie Consent
+const cookieConsent = document.getElementById("cookieConsent");
+const acceptCookies = document.getElementById("acceptCookies");
+if (localStorage.getItem("cookiesAccepted")) {
+  cookieConsent.style.display = "none";
 }
-
-// Smooth Scrolling for All Navigation Buttons in the Header
-// This targets all <a> elements inside the nav with hrefs that start with "#"
-document.querySelectorAll('nav a[href^="#"]').forEach(link => {
-  link.addEventListener('click', function(e) {
-    e.preventDefault();
-    const targetSection = document.querySelector(this.getAttribute('href'));
-    if (targetSection) {
-      const targetY = targetSection.getBoundingClientRect().top + window.scrollY;
-      smoothScrollTo(targetY, 1500);
-    }
-  });
+acceptCookies.addEventListener("click", function() {
+  localStorage.setItem("cookiesAccepted", "true");
+  cookieConsent.style.display = "none";
 });
