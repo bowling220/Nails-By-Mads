@@ -13,9 +13,171 @@
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script>
     (function(){
-      emailjs.init("LwUYMW4cNABV44Uub");
+      emailjs.init("LwUYMW4cNABV44Uub"); // Replace with your actual EmailJS public key
     })();
   </script>
+  <style>
+    /* Added some basic styles for modal visibility and structure */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1000; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 10% auto; /* 10% from the top and centered */
+      padding: 25px;
+      border: 1px solid #888;
+      width: 80%; /* Could be more or less, depending on screen size */
+      max-width: 600px; /* Maximum width */
+      border-radius: 8px;
+      position: relative;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      position: absolute;
+      top: 10px;
+      right: 20px;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* Booking Form Styles */
+    .booking-form .form-field {
+      margin-bottom: 15px;
+    }
+
+    .booking-form label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      font-size: 0.9em;
+    }
+
+    .booking-form input[type="text"],
+    .booking-form input[type="email"],
+    .booking-form input[type="tel"],
+    .booking-form input[type="date"],
+    .booking-form input[type="time"],
+    .booking-form textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box; /* Include padding and border in element's total width and height */
+    }
+
+    .booking-form .form-row {
+      display: flex;
+      gap: 15px; /* Space between columns */
+    }
+
+    .booking-form .form-row .form-field {
+      flex: 1; /* Each field takes equal space */
+    }
+
+    .booking-form .full-width {
+      width: 100%;
+    }
+
+    .booking-form button[type="submit"] {
+      background-color: #ff6ec7; /* Pink theme color */
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.3s ease;
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .booking-form button[type="submit"]:hover {
+      background-color: #e65aa0; /* Darker pink on hover */
+    }
+
+    .required {
+      color: red;
+      margin-left: 2px;
+    }
+
+    /* Note Styles */
+    .consent-note {
+      color: black; /* Ensure text is readable */
+      background: #f9f6ff; /* Light purple background */
+      border-left: 5px solid #b47aff; /* Purple accent border */
+      padding: 12px 20px;
+      border-radius: 6px;
+      font-size: 1.15em;
+      font-weight: bold;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .food-allergy-note-modal { /* Specific class for modal note */
+      background: #fffbe7; /* Light yellow background */
+      border-left: 5px solid #ffc107; /* Yellow accent border */
+      padding: 12px 20px;
+      border-radius: 6px;
+      font-size: 1.08em;
+      margin-bottom: 16px;
+      color: #555; /* Slightly darker text for better contrast */
+    }
+    .food-allergy-note-modal strong {
+        color: #333; /* Darker strong text */
+    }
+
+    .flexible-hours-note {
+      background: #e9d8ff; /* Lighter purple background */
+      color: #3c1a6e; /* Darker purple text */
+      border-left: 4px solid #6318f9; /* Strong purple accent border */
+      padding: 14px 22px;
+      border-radius: 6px;
+      margin-bottom: 18px;
+      font-size: 1.12em;
+    }
+    .flexible-hours-note strong {
+        color: #4a148c; /* Even darker purple for strong text */
+    }
+
+
+    /* Style for the footer food allergy note to match appointment notes */
+    .food-allergy-note-footer {
+       max-width: 700px;
+       margin: 0 auto 30px auto;
+       color: black; /* Readable text color */
+       background: #f9f6ff; /* Light purple background - matching consent note */
+       border-left: 5px solid #b47aff; /* Purple accent border - matching consent note */
+       padding: 12px 20px;
+       border-radius: 6px;
+       font-size: 1.15em; /* Matching consent note */
+       font-weight: bold; /* Matching consent note */
+    }
+     .food-allergy-note-footer strong {
+        color: #333; /* Ensure strong text is readable */
+     }
+
+
+  </style>
+
 </head>
 <body>
   <!-- Header with Navigation -->
@@ -27,13 +189,13 @@
         <span class="bar"></span>
         <span class="bar"></span>
       </button>
-      
+
       <!-- Brand with Logo -->
       <div class="brand">
         <img src="output.png" alt="Logo">
         Nails By Mads
       </div>
-      
+
       <!-- Navigation Links -->
       <ul id="navLinks">
         <li><a href="#home">Home</a></li>
@@ -45,7 +207,7 @@
         <li><a href="#blog">Inspos</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      
+
       <!-- Book Appointment Button -->
       <button id="bookBtn" class="book-btn">Book Appointment</button>
     </nav>
@@ -63,7 +225,7 @@
     <div class="about-content">
       <img src="profile.jpg" alt="Profile Image" class="profile-img">
       <p>
-        At Nails By Mads, I offer high-quality nail care services, my starting point is my home, and I plan to be come certified and get a real studio in the future! I am 18 and graduating highschool this year. I will be attending Mercyhurst University in fall of 2025 as a Criminal Justice major. 
+        At Nails By Mads, I offer high-quality nail care services, my starting point is my home, and I plan to be come certified and get a real studio in the future! I am 18 and graduating highschool this year. I will be attending Mercyhurst University in fall of 2025 as a Criminal Justice major.
       </p>
     </div>
   </section>
@@ -95,24 +257,41 @@
   <h2>Prices</h2>
   <div class="prices-grid">
     <div class="price-item">
-      <h3>Base & Adhesive</h3>
-      <p>$20</p>
+      <h3>Base Price</h3>
+      <p>$55</p>
     </div>
     <div class="price-item">
-      <h3>Nail Art</h3>
-      <p>$30</p>
+      <h3>Designs</h3>
+      <p>+$10</p>
     </div>
     <div class="price-item">
-      <h3>Gems and Chrome</h3>
-      <p>$40</p>
+      <h3>Chrome</h3>
+      <p>+$5</p>
     </div>
     <div class="price-item">
-      <h3>Removal</h3>
+      <h3>Gems/Diamonds</h3>
+      <p>+$5</p>
+    </div>
+    <div class="price-item">
+      <h3>3D Gel</h3>
+      <p>+$10</p>
+    </div>
+    <div class="price-item">
+      <h3>Removal of my own work</h3>
       <p>$25</p>
     </div>
+    <div class="price-item">
+      <h3>Removal of others' work</h3>
+      <p>$35</p>
+    </div>
+  </div>
+  <div class="price-note" style="margin-top: 20px; background: #cd48c9; border-left: 4px solid #ff6ec7; padding: 10px 18px; border-radius: 6px;">
+    <strong>Note:</strong> I will need to know if you want specific gems or more detailed designs prior to your appointment. This way, I can order supplies that I will need to ensure you leave happy with your nails!
+  </div>
+  <div class="price-note travel" style="margin-top: 10px; padding: 10px 18px; border-radius: 6px;">
+    <strong>Travel Option:</strong> I am willing to travel to you for your appointment! Please let me know if you would like this option when booking.
   </div>
 </section>
-
 
   <!-- Testimonials Section -->
   <section id="testimonials" class="testimonials container">
@@ -124,7 +303,7 @@
       </div>
       <div class="testimonial">
         <p>"A truly luxurious experience. I highly recommend Nails By Mads!"</p>
-        <h4>- Jillian R.</h4>
+        <h4>- Christine W.</h4>
       </div>
     </div>
   </section>
@@ -133,10 +312,10 @@
   <section id="gallery" class="gallery container">
     <h2>Gallery</h2>
     <div class="gallery-grid">
-      <img src="image1.heic" alt="Gallery Image 1">
-      <img src="image2.HEIC" alt="Gallery Image 2">
-      <img src="image3.HEIC" alt="Gallery Image 3">
-      <img src="image4.HEIC" alt="Gallery Image 4">
+      <img src="image1.png" alt="Gallery Image 1">
+      <img src="image2.png" alt="Gallery Image 2">
+      <img src="image3.png" alt="Gallery Image 3">
+      <img src="image4.png" alt="Gallery Image 4">
     </div>
   </section>
 
@@ -147,7 +326,7 @@
     <article class="blog-post">
       <img src="post1.jpg" alt="Blog Post 1">
       <div class="blog-post-meta">
-        <p>By Madie Borland - <time datetime="2025-06-01">February 20, 2025</time></p>
+        <p>By Madie Borland - <time datetime="2025-02-20">February 20, 2025</time></p> <!-- Corrected datetime format -->
       </div>
       <div class="blog-post-content">
         <h3>Blooming Hawaiian Flower</h3>
@@ -158,13 +337,13 @@
     <article class="blog-post">
       <img src="post2.jpg" alt="Blog Post 2">
       <div class="blog-post-meta">
-        <p>By Madie Borland - <time datetime="2025-06-05">February 20, 2025</time></p>
+        <p>By Madie Borland - <time datetime="2025-02-20">February 20, 2025</time></p> <!-- Corrected datetime format -->
       </div>
       <div class="blog-post-content">
         <h3>Blooming Gel</h3>
         <p>Blooming gel creates a stretched blooming effect and can be used in various designs. Definitely one of my favorites!</p>
       </div>
-   
+
     </article>
   </div>
 </section>
@@ -181,12 +360,14 @@
         <p><strong>Address:</strong> 2013 Cook Ave, Erie, PA 16510</p>
       </div>
       <div class="map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2958.228654345426!2d-80.00252801127469!3d42.14539357442442!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882d7dd02840a4c7%3A0xdb9c27591a85eb2a!2s2013%20Cook%20Ave%2C%20Erie%2C%20PA%2016510!5e0!3m2!1sen!2sus!4v1740088381545!5m2!1sen!2sus" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>      </div>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2958.228654345426!2d-80.00252801127469!3d42.14539357442442!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882d7dd02840a4c7%3A0xdb9c27591a85eb2a!2s2013%20Cook%20Ave%2C%20Erie%2C%20PA%2016510!5e0!3m2!1sen!2sus!4v1740088381545!5m2!1sen!2sus" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
     </div>
-    <form class="contact-form">
-      <input type="text" placeholder="Your Name" required>
-      <input type="email" placeholder="Your Email" required>
-      <textarea rows="4" placeholder="Your Message" required></textarea>
+    <!-- Simplified contact form - add EmailJS functionality later if needed -->
+    <form class="contact-form" id="contactForm">
+      <input type="text" id="contactName" placeholder="Your Name" required>
+      <input type="email" id="contactEmail" placeholder="Your Email" required>
+      <textarea rows="4" id="contactMessage" placeholder="Your Message" required></textarea>
       <button type="submit">Send Message</button>
     </form>
   </section>
@@ -194,80 +375,69 @@
   <!-- Appointment Booking Modal -->
   <div id="bookingModal" class="modal">
     <div class="modal-content">
-      <span class="close" id="closeBookingModal">&times;</span>
+      <span class="close" id="closeBookingModal">×</span>
       <h2 style="font-size: 24px; margin-bottom: 15px; text-align: center;">Book an Appointment</h2>
-      
+
       <div class="booking-hours">
-        <h3 style="font-size: 16px; margin: 0 auto 8px; color: #ff6ec7; text-align: center; display: flex; justify-content: center; align-items: center;">Business Hours</h3>
-        <div class="hours-grid">
-          <!-- Full width row for Monday-Friday -->
-          <div class="hours-row">
-            <div class="day-hours full-width">
-              <strong>Mon-Fri</strong>
-              <span>10AM-6PM</span>
-            </div>
-          </div>
-          <!-- Half width row for Saturday and Sunday -->
-          <div class="hours-row">
-            <div class="day-hours half-width">
-              <strong>Saturday</strong>
-              <span>By Appt</span>
-            </div>
-            <div class="day-hours half-width">
-              <strong>Sunday</strong>
-              <span>Closed</span>
-            </div>
-          </div>
+        <!-- Using the dedicated CSS class for flexible hours note styling -->
+        <div class="flexible-hours-note">
+          <strong>Flexible Appointment Times:</strong> Right now my times are flexible, I do not have set hours. We can discuss times and dates after an appointment request is made. Thank you!
         </div>
       </div>
 
       <form id="bookingForm" class="booking-form">
+  
         <!-- Full width field -->
         <div class="form-field full-width">
           <label for="name">Name <span class="required">*</span></label>
-          <input type="text" id="name" required>
+          <input type="text" id="name" name="user_name" required> <!-- Name updated for EmailJS template -->
         </div>
-        
+
         <!-- Split fields into two columns -->
         <div class="form-row">
           <div class="form-field">
             <label for="email">Email <span class="required">*</span></label>
-            <input type="email" id="email" required>
+            <input type="email" id="email" name="to_email" required> <!-- Name updated to match EmailJS template -->
           </div>
-          
+
           <div class="form-field">
             <label for="phone">Phone Number <span class="required">*</span></label>
-            <input type="tel" id="phone" required>
+            <input type="tel" id="phone" name="phone_number" required> <!-- Added name attribute for EmailJS -->
           </div>
         </div>
-        
+
         <!-- Split fields into two columns -->
         <div class="form-row">
           <div class="form-field">
-            <label for="date">Date <span class="required">*</span></label>
-            <input type="date" id="date" required>
+            <label for="date">Preferred Date <span class="required">*</span></label>
+            <input type="date" id="date" name="appointment_date" required> <!-- Name updated for EmailJS template -->
           </div>
-          
+
           <div class="form-field">
-            <label for="time">Time <span class="required">*</span></label>
-            <input type="time" id="time" min="10:00" max="18:00" required>
+            <label for="time">Preferred Time <span class="required">*</span></label>
+            <input type="time" id="time" name="appointment_time" required> <!-- Name updated for EmailJS template -->
           </div>
         </div>
-        
+
         <!-- Full width field -->
         <div class="form-field full-width">
-          <label for="notes">Special Requests</label>
-          <textarea id="notes" rows="2"></textarea>
+          <label for="notes">Special Requests (Designs, etc.)</label>
+          <textarea id="notes" name="message" rows="2"></textarea> <!-- Added name attribute for EmailJS -->
         </div>
-        
+
         <p style="font-size: 12px; opacity: 0.8; margin-top: 8px;">
           <span class="required">*</span> Required fields
         </p>
-        <p style="font-size: 12px; opacity: 0.8;">
+        <!-- Using the dedicated CSS class for consent note styling -->
+        <div class="consent-note">
           Note: Consent form signature required upon arrival
-        </p>
-        
-        <button type="submit" style="margin-top: 12px;">Book Now</button>
+        </div>
+        <!-- Using the dedicated CSS class for modal food allergy note styling -->
+        <div class="food-allergy-note-modal">
+          <strong>Important Food Allergy Policy:</strong> Unfortunately, due to my deadly food allergy to wheat/gluten, I do not recommend eating during your appointment. This is for my own safety. If you have a reason you need to bring food with you, feel free to message me about details. I love all of my clients and appreciate your cooperation!
+        </div>
+
+        <button type="submit" style="margin-top: 12px;">Request Appointment</button> <!-- Changed text slightly -->
       </form>
     </div>
   </div>
@@ -281,6 +451,10 @@
   </div>
 
   <!-- Footer Section (Full Width) -->
+  <!-- Using the dedicated CSS class for footer food allergy note styling -->
+  <div class="food-allergy-note-footer">
+    <strong>Important Food Allergy Policy:</strong> Unfortunately, due to my deadly food allergy to wheat/gluten, I do not recommend eating during your appointment. This is for my own safety. If you have a reason you need to bring food with you, feel free to message me about details. I love all of my clients and appreciate your cooperation!
+  </div>
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-left">
@@ -296,11 +470,108 @@
           <a href="https://www.tiktok.com/@msredhead2.0?_t=ZT-8u5HKID37wE&_r=1" target="_blank"><img src="https://static.vecteezy.com/system/resources/previews/006/057/996/non_2x/tiktok-logo-on-transparent-background-free-vector.jpg" alt="Tiktok"></a>
         </div>
       </div>
-    </div>  
-    <p>&copy; 2025 Nails By Mads. All rights reserved.</p>
+    </div>
+    <p>© 2025 Nails By Mads. All rights reserved.</p>
   </footer>
 
   <!-- Main Script -->
-  <script src="js/script.js"></script>
+  <script>
+    // Basic Modal Handling
+    const bookBtn = document.getElementById('bookBtn');
+    const bookingModal = document.getElementById('bookingModal');
+    const closeBookingModal = document.getElementById('closeBookingModal');
+
+    bookBtn.onclick = function() {
+      bookingModal.style.display = "block";
+    }
+
+    closeBookingModal.onclick = function() {
+      bookingModal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      if (event.target == bookingModal) {
+        bookingModal.style.display = "none";
+      }
+    }
+
+    // Hamburger Menu Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active'); // Assuming 'active' class controls visibility/layout
+        // Add active class to toggle button for styling (e.g., change to X)
+        menuToggle.classList.toggle('active');
+    });
+
+     // Close menu when a link is clicked (optional, good for SPA feel)
+     navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        });
+    });
+
+
+    // Cookie Consent
+    const cookieConsent = document.getElementById('cookieConsent');
+    const acceptCookies = document.getElementById('acceptCookies');
+
+    // Check if cookie was already accepted
+    if (!localStorage.getItem('cookiesAccepted')) {
+        cookieConsent.style.display = 'block'; // Or your preferred display style
+    }
+
+    acceptCookies.onclick = function() {
+        localStorage.setItem('cookiesAccepted', 'true');
+        cookieConsent.style.display = 'none';
+    }
+
+    // EmailJS Integration for Booking Form
+    document.getElementById('bookingForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      // Show loading state / disable button (optional)
+      const submitButton = this.querySelector('button[type="submit"]');
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending...';
+
+      // First, send to you (Madie)
+emailjs.sendForm('service_3nsu0pj', 'template_3pn5nga', this)
+  .then(function(response) {
+    // Then, send confirmation to the user
+    emailjs.sendForm('service_3nsu0pj', 'template_m1blb99', event.target)
+      .then(function(response2) {
+        alert('Appointment request sent successfully! Madeline will contact you to confirm. A confirmation email has also been sent to you.');
+        bookingModal.style.display = 'none';
+        document.getElementById('bookingForm').reset();
+        submitButton.disabled = false;
+        submitButton.textContent = 'Request Appointment';
+      }, function(error2) {
+        alert('Your request was sent, but we could not send a confirmation email. Please check your email address.');
+        submitButton.disabled = false;
+        submitButton.textContent = 'Request Appointment';
+      });
+  }, function(error) {
+    alert('Failed to send appointment request. Please try again or contact Madeline directly. Error: ' + JSON.stringify(error));
+    submitButton.disabled = false;
+    submitButton.textContent = 'Request Appointment';
+  });
+    });
+
+    // Basic Contact Form Handling (Example - Adapt for EmailJS if needed)
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        // Replace with your EmailJS logic for the contact form if desired
+        alert('Thank you for your message!');
+        this.reset();
+    });
+
+  </script>
+  <!-- Include your original script.js if it contains other functionality -->
+  <!-- <script src="js/script.js"></script> -->
 </body>
 </html>
