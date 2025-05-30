@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nails By Mads</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Google Fonts: Amatic SC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>
+    (function(){
+      emailjs.init("LwUYMW4cNABV44Uub"); // Replace with your actual EmailJS public key
+    })();
+  </script>
+  <style>
+    /* Added some basic styles for modal visibility and structure */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1000; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto; /* Reduced from 10% to 5% */
+      padding: 20px; /* Reduced padding */
+      border: 1px solid #888;
+      width: 90%; /* Increased from 80% */
+      max-width: 500px; /* Reduced from 600px */
+      border-radius: 8px;
+      position: relative;
+      max-height: 90vh; /* Limit height to 90% of viewport */
+      overflow-y: auto; /* Enable scrolling if content is too long */
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      position: absolute;
+      top: 10px;
+      right: 20px;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* Booking Form Styles */
+    .booking-form .form-field {
+      margin-bottom: 12px; /* Reduced from 15px */
+    }
+
+    .booking-form label {
+      display: block;
+      margin-bottom: 3px; /* Reduced from 5px */
+      font-weight: bold;
+      font-size: 0.85em; /* Reduced from 0.9em */
+    }
+
+    .booking-form input[type="text"],
+    .booking-form input[type="email"],
+    .booking-form input[type="tel"],
+    .booking-form input[type="date"],
+    .booking-form input[type="time"],
+    .booking-form textarea {
+      width: 100%;
+      padding: 8px; /* Reduced from 10px */
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .booking-form .form-row {
+      display: flex;
+      gap: 10px; /* Reduced from 15px */
+    }
+
+    .booking-form .form-row .form-field {
+      flex: 1; /* Each field takes equal space */
+    }
+
+    .booking-form .full-width {
+      width: 100%;
+    }
+
+    .booking-form button[type="submit"] {
+      background-color: #ff6ec7; /* Pink theme color */
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.3s ease;
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .booking-form button[type="submit"]:hover {
+      background-color: #e65aa0; /* Darker pink on hover */
+    }
+
+    .required {
+      color: red;
+      margin-left: 2px;
+    }
+
+    /* Note Styles - More compact */
+    .consent-note {
+      color: black; /* Ensure text is readable */
+      background: #f9f6ff; /* Light purple background */
+      border-left: 5px solid #b47aff; /* Purple accent border */
+      padding: 8px 15px; /* Reduced padding */
+      border-radius: 6px;
+      font-size: 1em; /* Reduced from 1.15em */
+      font-weight: bold;
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+
+    .food-allergy-note-modal {
+      background: #fffbe7; /* Light yellow background */
+      border-left: 5px solid #ffc107; /* Yellow accent border */
+      padding: 8px 15px; /* Reduced padding */
+      border-radius: 6px;
+      font-size: 0.95em; /* Reduced from 1.08em */
+      margin-bottom: 12px; /* Reduced from 16px */
+      color: #555; /* Slightly darker text for better contrast */
+    }
+
+    .food-allergy-note-modal strong {
+      color: #333; /* Darker strong text */
+    }
+
+    .flexible-hours-note {
+      background: #e9d8ff; /* Lighter purple background */
+      color: #3c1a6e; /* Darker purple text */
+      border-left: 4px solid #6318f9; /* Strong purple accent border */
+      padding: 10px 15px; /* Reduced padding */
+      border-radius: 6px;
+      margin-bottom: 12px; /* Reduced from 18px */
+      font-size: 1em; /* Reduced from 1.12em */
+    }
+
+    .flexible-hours-note strong {
+      color: #4a148c; /* Even darker purple for strong text */
+    }
+
+    /* Style for the footer food allergy note to match appointment notes */
+    .food-allergy-note-footer {
+       max-width: 700px;
+       margin: 0 auto 30px auto;
+       color: black; /* Readable text color */
+       background: #f9f6ff; /* Light purple background - matching consent note */
+       border-left: 5px solid #b47aff; /* Purple accent border - matching consent note */
+       padding: 12px 20px;
+       border-radius: 6px;
+       font-size: 1.15em; /* Matching consent note */
+       font-weight: bold; /* Matching consent note */
+    }
+     .food-allergy-note-footer strong {
+        color: #333; /* Ensure strong text is readable */
+     }
+
+    /* Make notes more compact on mobile */
+    @media screen and (max-width: 480px) {
+      .modal-content {
+        margin: 2% auto;
+        padding: 15px;
+        width: 95%;
+      }
+
+      .booking-form .form-row {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .consent-note,
+      .food-allergy-note-modal,
+      .flexible-hours-note {
+        padding: 8px 12px;
+        font-size: 0.9em;
+        margin-bottom: 8px;
+      }
+    }
+
+    /* Back to Top Button Styles */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #ff6ec7;
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: none;
+      font-size: 24px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      z-index: 9999;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .back-to-top.visible {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover {
+      background-color: #e65aa0;
+      transform: translateY(-3px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    @media screen and (max-width: 480px) {
+      .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+      }
+    }
+
+  </style>
+
+</head>
+<body>
+  <!-- Header with Navigation -->
+  <header id="home">
+    <nav>
+      <!-- Hamburger Menu (Mobile Only) -->
+      <button class="menu-toggle" id="menuToggle">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <!-- Brand with Logo -->
+      <div class="brand">
+        <img src="output.png" alt="Logo">
+        Nails By Mads
+      </div>
+
+      <!-- Navigation Links -->
+      <ul id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#prices">Prices</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#blog">Inspos</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <!-- Book Appointment Button -->
+      <button id="bookBtn" class="book-btn">Book Appointment</button>
+    </nav>
+    <div class="inner"></div>
+    <div class="hero-content">
+      <h1>Welcome to Nails By Mads</h1>
+      <p>Pamper yourself with our exquisite nail care services.</p>
+      <a href="#services" class="cta">Explore Services</a>
+    </div>
+  </header>
+
+  <!-- About Section -->
+  <section id="about" class="about container">
+    <h2>About Me</h2>
+    <div class="about-content">
+      <img src="profile.jpg" alt="Profile Image" class="profile-img">
+      <p>
+        At Nails By Mads, I offer high-quality nail care services, my starting point is my home, and I plan to become certified and get a real studio in the future! I am 18 and graduated high school this year. I will be attending Mercyhurst University in fall of 2025 as a Criminal Justice major.
+      </p>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="services container">
+    <h2>Nail Services</h2>
+    <div class="services-grid">
+      <div class="service-item">
+        <h3>Base & Adhesive</h3>
+        <p>Gel X nails are full nail tips, and are adhered with a safe gel glue.</p>
+      </div>
+      <div class="service-item">
+        <h3>Nail Art</h3>
+        <p>I love seeing your inspirations and love to try any new designs!</p>
+      </div>
+      <div class="service-item">
+        <h3>Gems and Chrome</h3>
+        <p>We offer beautiful gems and chrome aswell.</p>
+      </div>
+      <div class="service-item">
+        <h3>Removal</h3>
+        <p>I offer to drill down your color and remove old gel before getting a new set.</p>
+      </div>
+    </div>
+  </section>
+<!-- Prices Section -->
+<section id="prices" class="prices container">
+  <h2>Prices</h2>
+  <div class="prices-grid">
+    <div class="price-item">
+      <h3>Base Price</h3>
+      <p>$55</p>
+    </div>
+    <div class="price-item">
+      <h3>Designs</h3>
+      <p>+$10</p>
+    </div>
+    <div class="price-item">
+      <h3>Chrome</h3>
+      <p>+$5</p>
+    </div>
+    <div class="price-item">
+      <h3>Gems/Diamonds</h3>
+      <p>+$5</p>
+    </div>
+    <div class="price-item">
+      <h3>3D Gel</h3>
+      <p>+$10</p>
+    </div>
+    <div class="price-item">
+      <h3>Removal of my own work</h3>
+      <p>$25</p>
+    </div>
+    <div class="price-item">
+      <h3>Removal of others' work</h3>
+      <p>$35</p>
+    </div>
+  </div>
+  <div class="price-note" style="margin-top: 20px; background: #cd48c9; border-left: 4px solid #ff6ec7; padding: 10px 18px; border-radius: 6px;">
+    <strong>Note:</strong> I will need to know if you want specific gems or more detailed designs prior to your appointment. This way, I can order supplies that I will need to ensure you leave happy with your nails!
+  </div>
+  <div class="price-note travel" style="margin-top: 10px; padding: 10px 18px; border-radius: 6px;">
+    <strong>Travel Option:</strong> I am willing to travel to you for your appointment! Please let me know if you would like this option when booking.
+  </div>
+</section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="testimonials container">
+    <h2>Reviews</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <p>"Amazing service and attention to detail. My nails have never looked better!"</p>
+        <h4>- Renee A.</h4>
+      </div>
+      <div class="testimonial">
+        <p>"A truly luxurious experience. I highly recommend Nails By Mads!"</p>
+        <h4>- Christine W.</h4>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="gallery container">
+    <h2>Gallery</h2>
+    <div class="gallery-grid">
+      <img src="image1.png" alt="Gallery Image 1">
+      <img src="image2.png" alt="Gallery Image 2">
+      <img src="image3.png" alt="Gallery Image 3">
+      <img src="image4.png" alt="Gallery Image 4">
+    </div>
+  </section>
+
+<!-- Blog Section -->
+<section id="blog" class="blog container">
+  <h2>Some Favorites</h2>
+  <div class="blog-grid">
+    <article class="blog-post">
+      <img src="post1.jpg" alt="Blog Post 1">
+      <div class="blog-post-meta">
+        <p>By Madie Borland - <time datetime="2025-02-20">February 20, 2025</time></p> <!-- Corrected datetime format -->
+      </div>
+      <div class="blog-post-content">
+        <h3>Blooming Hawaiian Flower</h3>
+        <p>This cute detailed Hawaiian flower is my favorite to do on nails. Perfect for summer!</p>
+      </div>
+
+    </article>
+    <article class="blog-post">
+      <img src="post2.jpg" alt="Blog Post 2">
+      <div class="blog-post-meta">
+        <p>By Madie Borland - <time datetime="2025-02-20">February 20, 2025</time></p> <!-- Corrected datetime format -->
+      </div>
+      <div class="blog-post-content">
+        <h3>Blooming Gel</h3>
+        <p>Blooming gel creates a stretched blooming effect and can be used in various designs. Definitely one of my favorites!</p>
+      </div>
+
+    </article>
+  </div>
+</section>
+
+
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact container">
+    <h2>Contact Me</h2>
+    <div class="contact-info">
+      <div class="contact-details">
+        <p><strong>Phone:</strong> (814) 790-3017</p>
+        <p><strong>Email:</strong> madelineborland@gmail.com</p>
+        <p><strong>Address:</strong> 2013 Cook Ave, Erie, PA 16510</p>
+      </div>
+      <div class="map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2958.228654345426!2d-80.00252801127469!3d42.14539357442442!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882d7dd02840a4c7%3A0xdb9c27591a85eb2a!2s2013%20Cook%20Ave%2C%20Erie%2C%20PA%2016510!5e0!3m2!1sen!2sus!4v1740088381545!5m2!1sen!2sus" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+    <!-- Simplified contact form - add EmailJS functionality later if needed -->
+    <form class="contact-form" id="contactForm">
+      <input type="text" id="contactName" placeholder="Your Name" required>
+      <input type="email" id="contactEmail" placeholder="Your Email" required>
+      <textarea rows="4" id="contactMessage" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Appointment Booking Modal -->
+  <div id="bookingModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeBookingModal">×</span>
+      <h2 style="font-size: 24px; margin-bottom: 15px; text-align: center;">Book an Appointment</h2>
+
+      <div class="booking-hours">
+        <!-- Using the dedicated CSS class for flexible hours note styling -->
+        <div class="flexible-hours-note">
+          <strong>Flexible Appointment Times:</strong> Right now my times are flexible, I do not have set hours. We can discuss times and dates after an appointment request is made. Thank you!
+        </div>
+      </div>
+
+      <form id="bookingForm" class="booking-form">
+  
+        <!-- Full width field -->
+        <div class="form-field full-width">
+          <label for="name">Name <span class="required">*</span></label>
+          <input type="text" id="name" name="user_name" required> <!-- Name updated for EmailJS template -->
+        </div>
+
+        <!-- Split fields into two columns -->
+        <div class="form-row">
+          <div class="form-field">
+            <label for="email">Email <span class="required">*</span></label>
+            <input type="email" id="email" name="to_email" required> <!-- Name updated to match EmailJS template -->
+          </div>
+
+          <div class="form-field">
+            <label for="phone">Phone Number <span class="required">*</span></label>
+            <input type="tel" id="phone" name="phone_number" required> <!-- Added name attribute for EmailJS -->
+          </div>
+        </div>
+
+        <!-- Split fields into two columns -->
+        <div class="form-row">
+          <div class="form-field">
+            <label for="date">Preferred Date <span class="required">*</span></label>
+            <input type="date" id="date" name="appointment_date" required> <!-- Name updated for EmailJS template -->
+          </div>
+
+          <div class="form-field">
+            <label for="time">Preferred Time <span class="required">*</span></label>
+            <input type="time" id="time" name="appointment_time" required> <!-- Name updated for EmailJS template -->
+          </div>
+        </div>
+
+        <!-- Full width field -->
+        <div class="form-field full-width">
+          <label for="notes">Special Requests (Designs, etc.)</label>
+          <textarea id="notes" name="message" rows="2"></textarea> <!-- Added name attribute for EmailJS -->
+        </div>
+
+        <p style="font-size: 12px; opacity: 0.8; margin-top: 8px;">
+          <span class="required">*</span> Required fields
+        </p>
+        <!-- Using the dedicated CSS class for consent note styling -->
+        <div class="consent-note">
+          Note: Consent form signature required upon arrival
+        </div>
+        <!-- Using the dedicated CSS class for modal food allergy note styling -->
+        <div class="food-allergy-note-modal">
+          <strong>Important Food Allergy Policy:</strong> Unfortunately, due to my food allergy to wheat/gluten, I do not recommend eating during your appointment. This is for my own safety. If you have a reason you need to bring food with you, feel free to message me about details. I love all of my clients and appreciate your cooperation!
+        </div>
+
+        <button type="submit" style="margin-top: 12px;">Request Appointment</button> <!-- Changed text slightly -->
+      </form>
+    </div>
+  </div>
+
+  <!-- Cookie Consent -->
+  <div id="cookieConsent" class="cookie-consent">
+    <p>
+      We use cookies to ensure you get the best experience.
+      <button id="acceptCookies">Accept</button>
+    </p>
+  </div>
+
+  <!-- Footer Section (Full Width) -->
+  <!-- Using the dedicated CSS class for footer food allergy note styling -->
+  <div class="food-allergy-note-footer">
+    <strong>Important Food Allergy Policy:</strong> Unfortunately, due to my food allergy to wheat/gluten, I do not recommend eating during your appointment. This is for my own safety. If you have a reason you need to bring food with you, feel free to message me about details. I love all of my clients and appreciate your cooperation!
+  </div>
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-left">
+        <h2>Nails By Mads</h2>
+      </div>
+      <div class="footer-center">
+        <img src="output.png" alt="Logo" class="footer-logo">
+      </div>
+      <div class="footer-right">
+        <div class="social-media">
+          <a href="https://www.facebook.com/share/1Hr7vwFS7s/?mibextid=wwXIfr" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Facebook_logo_%28square%29.png/640px-Facebook_logo_%28square%29.png" alt="Facebook"></a>
+          <a href="https://www.instagram.com/b_madie5?igsh=OTdtbDVobXVueWRk&utm_source=qr" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/640px-Instagram_logo_2022.svg.png" alt="Instagram"></a>
+          <a href="https://www.tiktok.com/@msredhead2.0?_t=ZT-8u5HKID37wE&_r=1" target="_blank"><img src="https://static.vecteezy.com/system/resources/previews/006/057/996/non_2x/tiktok-logo-on-transparent-background-free-vector.jpg" alt="Tiktok"></a>
+        </div>
+      </div>
+    </div>
+    <p>© 2025 Nails By Mads. All rights reserved.</p>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button id="backToTop" class="back-to-top" title="Back to Top">↑</button>
+
+  <!-- Main Script -->
+  <script>
+    // Basic Modal Handling
+    const bookBtn = document.getElementById('bookBtn');
+    const bookingModal = document.getElementById('bookingModal');
+    const closeBookingModal = document.getElementById('closeBookingModal');
+
+    bookBtn.onclick = function() {
+      bookingModal.style.display = "block";
+    }
+
+    closeBookingModal.onclick = function() {
+      bookingModal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      if (event.target == bookingModal) {
+        bookingModal.style.display = "none";
+      }
+    }
+
+    // Hamburger Menu Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active'); // Assuming 'active' class controls visibility/layout
+        // Add active class to toggle button for styling (e.g., change to X)
+        menuToggle.classList.toggle('active');
+    });
+
+     // Close menu when a link is clicked (optional, good for SPA feel)
+     navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        });
+    });
+
+
+    // Cookie Consent
+    const cookieConsent = document.getElementById('cookieConsent');
+    const acceptCookies = document.getElementById('acceptCookies');
+
+    // Check if cookie was already accepted
+    if (!localStorage.getItem('cookiesAccepted')) {
+        cookieConsent.style.display = 'block'; // Or your preferred display style
+    }
+
+    acceptCookies.onclick = function() {
+        localStorage.setItem('cookiesAccepted', 'true');
+        cookieConsent.style.display = 'none';
+    }
+
+    // EmailJS Integration for Booking Form
+    document.getElementById('bookingForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      // Show loading state / disable button (optional)
+      const submitButton = this.querySelector('button[type="submit"]');
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending...';
+
+      // First, send to you (Madie)
+emailjs.sendForm('service_3nsu0pj', 'template_3pn5nga', this)
+  .then(function(response) {
+    // Then, send confirmation to the user
+    emailjs.sendForm('service_3nsu0pj', 'template_m1blb99', event.target)
+      .then(function(response2) {
+        alert('Appointment request sent successfully! Madeline will contact you to confirm. A confirmation email has also been sent to you.');
+        bookingModal.style.display = 'none';
+        document.getElementById('bookingForm').reset();
+        submitButton.disabled = false;
+        submitButton.textContent = 'Request Appointment';
+      }, function(error2) {
+        alert('Your request was sent, but we could not send a confirmation email. Please check your email address.');
+        submitButton.disabled = false;
+        submitButton.textContent = 'Request Appointment';
+      });
+  }, function(error) {
+    alert('Failed to send appointment request. Please try again or contact Madeline directly. Error: ' + JSON.stringify(error));
+    submitButton.disabled = false;
+    submitButton.textContent = 'Request Appointment';
+  });
+    });
+
+    // Basic Contact Form Handling (Example - Adapt for EmailJS if needed)
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        // Replace with your EmailJS logic for the contact form if desired
+        alert('Thank you for your message!');
+        this.reset();
+    });
+
+    // Back to Top Button Functionality
+    const backToTopButton = document.getElementById('backToTop');
+
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 100) { // Show button after scrolling 100px
+        backToTopButton.classList.add('visible');
+      } else {
+        backToTopButton.classList.remove('visible');
+      }
+    });
+
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+  </script>
+  <!-- <script src="js/script.js"></script> -->
+</body>
+</html>
