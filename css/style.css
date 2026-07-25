@@ -1645,12 +1645,16 @@ span.flatpickr-weekday {
 }
 
 .oler-agency-logo {
-  width: 52px;
   height: 52px;
-  border-radius: 50%;
-  border: 2px solid var(--accent-primary);
-  object-fit: cover;
-  box-shadow: 0 0 20px rgba(255, 110, 199, 0.5);
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 12px rgba(255, 110, 199, 0.4));
+  transition: all 0.3s ease;
+}
+
+.oler-agency-card:hover .oler-agency-logo {
+  transform: scale(1.08);
+  filter: drop-shadow(0 0 18px rgba(255, 110, 199, 0.75));
 }
 
 .oler-agency-text h5 {
