@@ -1603,6 +1603,18 @@ span.flatpickr-weekday {
   color: var(--text-muted);
 }
 
+.agency-credit a {
+  color: var(--accent-primary);
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.agency-credit a:hover {
+  color: #ffffff;
+  text-shadow: 0 0 14px rgba(255, 110, 199, 0.8);
+}
+
 .cookie-banner, .cookie-consent {
   position: fixed;
   bottom: 0;
