@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nails By Mads | High-Quality Custom Gel-X & Nail Art</title>
-    <meta name="description" content="Nails By Mads - High-Quality Custom Gel-X & Nail Art Studio in Erie, PA">
+    <title>Prices & Investment | Nails By Mads</title>
+    <meta name="description" content="Transparent pricing for high-end nail care and custom Gel-X at Nails By Mads.">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -16,121 +16,177 @@
     </script>
 </head>
 <body>
-    <header id="home">
-        <nav class="floating-nav">
-            <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
-                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
-            </button>
-            <div class="brand">
-                <img src="output.png" alt="Nails By Mads Logo"> <span>Nails By Mads</span>
-            </div>
-            <ul id="navLinks">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="prices.html">Prices</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="reviews.html">Reviews</a></li>
-                <li><a href="blog.html">Inspos</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-            <button id="bookBtn" class="book-btn">Book Appointment</button>
-        </nav>
-        
-        <div class="inner"></div>
-        <canvas id="heroParticles"></canvas>
-        <div class="hero-content">
-            <h1 class="gradient-title">Welcome to Nails By Mads</h1>
-            <p class="subtitle">Pamper yourself with our exquisite nail care services.</p>
-            <a href="services.html" class="cta-btn primary">Explore Services</a>
+    <nav class="floating-nav">
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+            <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </button>
+        <div class="brand">
+            <img src="output.png" alt="Nails By Mads Logo"> <span>Nails By Mads</span>
+        </div>
+        <ul id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="prices.html" class="active">Prices</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+            <li><a href="blog.html">Inspos</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button id="bookBtn" class="book-btn">Book Appointment</button>
+    </nav>
+    
+    <header class="page-hero">
+        <div class="hero-inner">
+            <h1 class="gradient-title">Investment & Prices</h1>
+            <p class="subtitle">Transparent pricing for high-end custom Gel-X & nail art</p>
         </div>
     </header>
 
-    <section class="feature-banner">
-        <div class="feature">
-            <i class="fas fa-gem"></i>
-            <span>Luxury Gel-X</span>
-        </div>
-        <div class="feature">
-            <i class="fas fa-paint-brush"></i>
-            <span>Bespoke Nail Art</span>
-        </div>
-        <div class="feature">
-            <i class="fas fa-star"></i>
-            <span>Custom Gems & Chrome</span>
-        </div>
-        <div class="feature">
-            <i class="fas fa-home"></i>
-            <span>Home Studio Experience</span>
-        </div>
-    </section>
-
-    <section class="featured-services section-padding reveal">
+    <!-- Visual Service Prices Section -->
+    <section class="prices-section section-padding reveal">
         <div class="container">
-            <h2 class="section-title">Signature Services</h2>
-            <div class="service-cards">
-                <div class="service-card">
-                    <img src="image1.png" alt="Gel-X Extensions">
-                    <div class="card-content">
-                        <h3>Gel-X Base & Adhesive</h3>
-                        <p>Gel X nails are full nail tips, and are adhered with a safe gel glue for a natural feel.</p>
-                        <button class="book-service-btn modal-trigger">Book Service</button>
+            <h2 class="section-title">Service Menu</h2>
+            <div class="price-cards-grid">
+                <!-- Base Set -->
+                <div class="price-card featured">
+                    <div class="price-card-header">
+                        <span class="price-tag">$55</span>
+                        <h3>Base Gel-X Set</h3>
                     </div>
+                    <p>Full nail tips adhered with safe gel glue + solid gel color polish of your choice.</p>
                 </div>
-                <div class="service-card">
-                    <img src="image2.png" alt="Custom Nail Art">
-                    <div class="card-content">
-                        <h3>Bespoke Nail Art</h3>
-                        <p>I love seeing your inspirations and love to try any new designs!</p>
-                        <button class="book-service-btn modal-trigger">Book Service</button>
+
+                <!-- Custom Designs -->
+                <div class="price-card">
+                    <div class="price-card-header">
+                        <span class="price-tag">+$10</span>
+                        <h3>Custom Designs</h3>
                     </div>
+                    <p>Hand-painted nail art tailored to your inspirations & Pinterest pictures.</p>
                 </div>
-                <div class="service-card">
-                    <img src="image3.png" alt="Gems and Chrome">
-                    <div class="card-content">
-                        <h3>Gems and Chrome</h3>
-                        <p>We offer beautiful sparkling gems, 3D gel art, and chrome finishes as well.</p>
-                        <button class="book-service-btn modal-trigger">Book Service</button>
+
+                <!-- Mirror Chrome -->
+                <div class="price-card">
+                    <div class="price-card-header">
+                        <span class="price-tag">+$5</span>
+                        <h3>Mirror Chrome</h3>
                     </div>
+                    <p>All-over mirror or glazed chrome powder finish across your set.</p>
+                </div>
+
+                <!-- Gems & Diamonds -->
+                <div class="price-card">
+                    <div class="price-card-header">
+                        <span class="price-tag">+$5</span>
+                        <h3>Gems & Diamonds</h3>
+                    </div>
+                    <p>Beautiful sparkling crystal, gem, and diamond placements.</p>
+                </div>
+
+                <!-- 3D Gel Art -->
+                <div class="price-card">
+                    <div class="price-card-header">
+                        <span class="price-tag">+$10</span>
+                        <h3>3D Gel Art</h3>
+                    </div>
+                    <p>Textured 3D gel designs, blooming effects, and raised details.</p>
+                </div>
+
+                <!-- Removal Own -->
+                <div class="price-card">
+                    <div class="price-card-header">
+                        <span class="price-tag">$25</span>
+                        <h3>Removal (Own Work)</h3>
+                    </div>
+                    <p>Gentle drill down & safe removal of old Gel-X set previously applied by me.</p>
+                </div>
+
+                <!-- Removal Others -->
+                <div class="price-card">
+                    <div class="price-card-header">
+                        <span class="price-tag">$35</span>
+                        <h3>Removal (Others' Work)</h3>
+                    </div>
+                    <p>Gentle drill down & removal of old gel or acrylic applied elsewhere.</p>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <section class="reviews-highlight section-padding reveal">
-        <div class="container">
-            <h2 class="section-title text-center">Client Love</h2>
-            <div class="review-carousel">
-                <div class="review-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="quote">"Amazing service and attention to detail. My nails have never looked better!"</p>
-                    <span class="client-name">- Renee A.</span>
-                </div>
-                <div class="review-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="quote">"A truly luxurious experience. I highly recommend Nails By Mads!"</p>
-                    <span class="client-name">- Christine W.</span>
+            <!-- Interactive Set Total Estimator -->
+            <div class="price-calc-container" style="margin-top: 60px;">
+                <div class="price-calc">
+                    <h3><i class="fas fa-calculator"></i> Estimate Your Total</h3>
+                    <p class="text-center" style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 24px;">Select your desired options below to see an estimated set total:</p>
+                    
+                    <form id="estimatorForm">
+                        <div class="calc-options-grid">
+                            <label class="calc-option-card active">
+                                <input type="checkbox" value="55" checked disabled>
+                                <span class="calc-label-text">Base Gel-X Set</span>
+                                <span class="calc-label-price">$55</span>
+                            </label>
+                            <label class="calc-option-card">
+                                <input type="checkbox" value="10" class="calc-cb">
+                                <span class="calc-label-text">Custom Designs</span>
+                                <span class="calc-label-price">+$10</span>
+                            </label>
+                            <label class="calc-option-card">
+                                <input type="checkbox" value="5" class="calc-cb">
+                                <span class="calc-label-text">Mirror Chrome</span>
+                                <span class="calc-label-price">+$5</span>
+                            </label>
+                            <label class="calc-option-card">
+                                <input type="checkbox" value="5" class="calc-cb">
+                                <span class="calc-label-text">Gems & Diamonds</span>
+                                <span class="calc-label-price">+$5</span>
+                            </label>
+                            <label class="calc-option-card">
+                                <input type="checkbox" value="10" class="calc-cb">
+                                <span class="calc-label-text">3D Gel Art</span>
+                                <span class="calc-label-price">+$10</span>
+                            </label>
+                            <label class="calc-option-card">
+                                <input type="checkbox" value="25" class="calc-cb">
+                                <span class="calc-label-text">Removal (Own Work)</span>
+                                <span class="calc-label-price">+$25</span>
+                            </label>
+                            <label class="calc-option-card">
+                                <input type="checkbox" value="35" class="calc-cb">
+                                <span class="calc-label-text">Removal (Others' Work)</span>
+                                <span class="calc-label-price">+$35</span>
+                            </label>
+                        </div>
+
+                        <div class="calc-total-banner">
+                            <span>Estimated Set Total:</span>
+                            <span id="calcTotal" class="total-amount">$55</span>
+                        </div>
+
+                        <div class="text-center" style="margin-top: 24px;">
+                            <button type="button" class="btn btn-primary modal-trigger">Request Appointment</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <section class="inspo-lookbook section-padding reveal">
-        <div class="container">
-            <h2 class="section-title">Inspo Lookbook</h2>
-            <div class="lookbook-grid">
-                <div class="blog-card">
-                    <img src="post1.jpg" alt="Blooming Hawaiian Flower">
-                    <div class="blog-content">
-                        <h4>Blooming Hawaiian Flower</h4>
-                        <p>This cute detailed Hawaiian flower is my favorite to do on nails. Perfect for summer!</p>
+            <!-- Policy & Notes Cards -->
+            <div style="margin-top: 70px;">
+                <h2 class="section-title">Policies & Guidelines</h2>
+                <div class="policy-cards-grid">
+                    <div class="policy-card-item">
+                        <div class="policy-icon"><i class="fas fa-paint-brush"></i></div>
+                        <h4>Design Notice</h4>
+                        <p>I will need to know if you want specific gems or more detailed designs prior to your appointment. This way, I can order supplies that I will need to ensure you leave happy with your nails!</p>
                     </div>
-                </div>
-                <div class="blog-card">
-                    <img src="post2.jpg" alt="Blooming Gel Effect">
-                    <div class="blog-content">
-                        <h4>Blooming Gel Effect</h4>
-                        <p>Blooming gel creates a stretched blooming effect and can be used in various designs.</p>
+                    <div class="policy-card-item travel">
+                        <div class="policy-icon"><i class="fas fa-car"></i></div>
+                        <h4>Travel Option</h4>
+                        <p>I am willing to travel to you for your appointment! Please let me know if you would like this option when booking.</p>
+                    </div>
+                    <div class="policy-card-item allergy">
+                        <div class="policy-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                        <h4>Food Allergy Policy</h4>
+                        <p>Unfortunately, due to my food allergy to wheat/gluten, I do not recommend eating during your appointment. This is for my own safety. If you have a reason you need to bring food with you, feel free to message me!</p>
                     </div>
                 </div>
             </div>
@@ -230,7 +286,7 @@
       <p>We use cookies to ensure you get the best experience. <button id="acceptCookies">Accept</button></p>
     </div>
 
-  <footer class="footer">
+    <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col">
@@ -280,7 +336,6 @@
   </footer>
 
     <button id="backToTop" class="back-to-top" title="Back to Top">↑</button>
-
     <script src="js/script.js"></script>
 </body>
 </html>

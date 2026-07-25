@@ -3,134 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nails By Mads | High-Quality Custom Gel-X & Nail Art</title>
-    <meta name="description" content="Nails By Mads - High-Quality Custom Gel-X & Nail Art Studio in Erie, PA">
+    <title>Services | Nails By Mads</title>
+    <meta name="description" content="View our nail services: Full-Coverage Gel-X, Custom Art & Treatments in Erie, PA.">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
       (function(){ emailjs.init("LwUYMW4cNABV44Uub"); })();
     </script>
 </head>
 <body>
-    <header id="home">
-        <nav class="floating-nav">
-            <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
-                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
-            </button>
-            <div class="brand">
-                <img src="output.png" alt="Nails By Mads Logo"> <span>Nails By Mads</span>
-            </div>
-            <ul id="navLinks">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="prices.html">Prices</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="reviews.html">Reviews</a></li>
-                <li><a href="blog.html">Inspos</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-            <button id="bookBtn" class="book-btn">Book Appointment</button>
-        </nav>
-        
-        <div class="inner"></div>
-        <canvas id="heroParticles"></canvas>
-        <div class="hero-content">
-            <h1 class="gradient-title">Welcome to Nails By Mads</h1>
-            <p class="subtitle">Pamper yourself with our exquisite nail care services.</p>
-            <a href="services.html" class="cta-btn primary">Explore Services</a>
+    <nav class="floating-nav">
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+            <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </button>
+        <div class="brand">
+            <img src="output.png" alt="Nails By Mads Logo"> <span>Nails By Mads</span>
+        </div>
+        <ul id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html" class="active">Services</a></li>
+            <li><a href="prices.html">Prices</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+            <li><a href="blog.html">Inspos</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button id="bookBtn" class="book-btn">Book Appointment</button>
+    </nav>
+    
+    <header class="page-hero">
+        <div class="hero-inner">
+            <h1 class="gradient-title">Nail Services</h1>
+            <p class="subtitle">Full-Coverage Gel-X, Custom Art & Treatments</p>
         </div>
     </header>
 
-    <section class="feature-banner">
-        <div class="feature">
-            <i class="fas fa-gem"></i>
-            <span>Luxury Gel-X</span>
-        </div>
-        <div class="feature">
-            <i class="fas fa-paint-brush"></i>
-            <span>Bespoke Nail Art</span>
-        </div>
-        <div class="feature">
-            <i class="fas fa-star"></i>
-            <span>Custom Gems & Chrome</span>
-        </div>
-        <div class="feature">
-            <i class="fas fa-home"></i>
-            <span>Home Studio Experience</span>
-        </div>
-    </section>
-
-    <section class="featured-services section-padding reveal">
+    <section class="services-grid-section section-padding reveal">
         <div class="container">
-            <h2 class="section-title">Signature Services</h2>
-            <div class="service-cards">
-                <div class="service-card">
-                    <img src="image1.png" alt="Gel-X Extensions">
-                    <div class="card-content">
-                        <h3>Gel-X Base & Adhesive</h3>
-                        <p>Gel X nails are full nail tips, and are adhered with a safe gel glue for a natural feel.</p>
-                        <button class="book-service-btn modal-trigger">Book Service</button>
+            <div class="grid-4">
+                <div class="service-detail-card">
+                    <img src="image1.png" alt="Base & Adhesive">
+                    <div class="service-info">
+                        <h3>Base & Adhesive</h3>
+                        <p>Gel X nails are full nail tips, and are adhered with a safe gel glue.</p>
+                        <button class="book-service-btn modal-trigger">Book This Service</button>
                     </div>
                 </div>
-                <div class="service-card">
-                    <img src="image2.png" alt="Custom Nail Art">
-                    <div class="card-content">
-                        <h3>Bespoke Nail Art</h3>
+                <div class="service-detail-card">
+                    <img src="image2.png" alt="Nail Art">
+                    <div class="service-info">
+                        <h3>Nail Art</h3>
                         <p>I love seeing your inspirations and love to try any new designs!</p>
-                        <button class="book-service-btn modal-trigger">Book Service</button>
+                        <button class="book-service-btn modal-trigger">Book This Service</button>
                     </div>
                 </div>
-                <div class="service-card">
+                <div class="service-detail-card">
                     <img src="image3.png" alt="Gems and Chrome">
-                    <div class="card-content">
+                    <div class="service-info">
                         <h3>Gems and Chrome</h3>
-                        <p>We offer beautiful sparkling gems, 3D gel art, and chrome finishes as well.</p>
-                        <button class="book-service-btn modal-trigger">Book Service</button>
+                        <p>We offer beautiful gems and chrome aswell.</p>
+                        <button class="book-service-btn modal-trigger">Book This Service</button>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="reviews-highlight section-padding reveal">
-        <div class="container">
-            <h2 class="section-title text-center">Client Love</h2>
-            <div class="review-carousel">
-                <div class="review-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="quote">"Amazing service and attention to detail. My nails have never looked better!"</p>
-                    <span class="client-name">- Renee A.</span>
-                </div>
-                <div class="review-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="quote">"A truly luxurious experience. I highly recommend Nails By Mads!"</p>
-                    <span class="client-name">- Christine W.</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="inspo-lookbook section-padding reveal">
-        <div class="container">
-            <h2 class="section-title">Inspo Lookbook</h2>
-            <div class="lookbook-grid">
-                <div class="blog-card">
-                    <img src="post1.jpg" alt="Blooming Hawaiian Flower">
-                    <div class="blog-content">
-                        <h4>Blooming Hawaiian Flower</h4>
-                        <p>This cute detailed Hawaiian flower is my favorite to do on nails. Perfect for summer!</p>
-                    </div>
-                </div>
-                <div class="blog-card">
-                    <img src="post2.jpg" alt="Blooming Gel Effect">
-                    <div class="blog-content">
-                        <h4>Blooming Gel Effect</h4>
-                        <p>Blooming gel creates a stretched blooming effect and can be used in various designs.</p>
+                <div class="service-detail-card">
+                    <img src="image4.png" alt="Removal">
+                    <div class="service-info">
+                        <h3>Removal</h3>
+                        <p>I offer to drill down your color and remove old gel before getting a new set.</p>
+                        <button class="book-service-btn modal-trigger">Book This Service</button>
                     </div>
                 </div>
             </div>
@@ -230,7 +175,7 @@
       <p>We use cookies to ensure you get the best experience. <button id="acceptCookies">Accept</button></p>
     </div>
 
-  <footer class="footer">
+    <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col">
