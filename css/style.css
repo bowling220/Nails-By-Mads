@@ -148,6 +148,8 @@ img {
   background: linear-gradient(135deg, var(--accent-primary) 0%, #b47aff 100%);
   color: #fff;
   box-shadow: 0 4px 20px rgba(255, 110, 199, 0.35);
+  position: relative;
+  overflow: hidden;
 }
 
 .btn:hover, .cta-btn:hover, .book-service-btn:hover, .submit-btn:hover, .book-btn-large:hover {
@@ -282,6 +284,8 @@ nav.scrolled {
   cursor: pointer;
   transition: var(--transition-bounce);
   flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
 }
 
 .book-btn:hover {
@@ -908,6 +912,8 @@ header#home::after {
   cursor: pointer;
   font-size: 0.9rem;
   transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
 }
 
 .filter-btn:hover, .filter-btn.active {
@@ -1984,5 +1990,165 @@ span.flatpickr-weekday {
 
   nav .book-btn {
     display: none !important;
+  }
+}
+
+/* ==========================================================================
+   ANIMATIONS — ENTRANCE, STAGGER, MICRO-INTERACTIONS
+   ========================================================================== */
+
+/* Scroll Progress Bar */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  box-shadow: 0 0 12px rgba(255, 110, 199, 0.6);
+  z-index: 2000;
+  pointer-events: none;
+}
+
+/* Hero & Page-Hero Entrance */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(26px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes navDropIn {
+  from { opacity: 0; transform: translateY(-16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.floating-nav {
+  animation: navDropIn 0.7s cubic-bezier(0.25, 0.8, 0.25, 1) both;
+}
+
+.hero-content > .gradient-title,
+.page-hero .gradient-title {
+  animation: fadeSlideUp 0.9s cubic-bezier(0.25, 0.8, 0.25, 1) 0.1s both;
+}
+
+.hero-content > .subtitle,
+.page-hero .subtitle {
+  animation: fadeSlideUp 0.9s cubic-bezier(0.25, 0.8, 0.25, 1) 0.25s both;
+}
+
+.hero-content > .cta-btn {
+  animation: fadeSlideUp 0.9s cubic-bezier(0.25, 0.8, 0.25, 1) 0.4s both;
+}
+
+/* Feature Banner — Subtle Floating Icons */
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.feature i {
+  display: inline-block;
+  animation: iconFloat 3.2s ease-in-out infinite;
+}
+
+.feature:nth-child(2) i { animation-delay: 0.3s; }
+.feature:nth-child(3) i { animation-delay: 0.6s; }
+.feature:nth-child(4) i { animation-delay: 0.9s; }
+
+/* Staggered Card Grid Reveal (pairs with existing .reveal / .revealed) */
+.reveal .stagger-grid > * {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.reveal.revealed .stagger-grid > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal.revealed .stagger-grid > *:nth-child(1) { transition-delay: 0.05s; }
+.reveal.revealed .stagger-grid > *:nth-child(2) { transition-delay: 0.12s; }
+.reveal.revealed .stagger-grid > *:nth-child(3) { transition-delay: 0.19s; }
+.reveal.revealed .stagger-grid > *:nth-child(4) { transition-delay: 0.26s; }
+.reveal.revealed .stagger-grid > *:nth-child(5) { transition-delay: 0.33s; }
+.reveal.revealed .stagger-grid > *:nth-child(6) { transition-delay: 0.4s; }
+.reveal.revealed .stagger-grid > *:nth-child(7) { transition-delay: 0.47s; }
+.reveal.revealed .stagger-grid > *:nth-child(n+8) { transition-delay: 0.54s; }
+
+/* Mobile Menu Link Stagger */
+@media (max-width: 768px) {
+  #navLinks li {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  #navLinks.active li {
+    animation: fadeSlideUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  #navLinks.active li:nth-child(1) { animation-delay: 0.05s; }
+  #navLinks.active li:nth-child(2) { animation-delay: 0.1s; }
+  #navLinks.active li:nth-child(3) { animation-delay: 0.15s; }
+  #navLinks.active li:nth-child(4) { animation-delay: 0.2s; }
+  #navLinks.active li:nth-child(5) { animation-delay: 0.25s; }
+  #navLinks.active li:nth-child(6) { animation-delay: 0.3s; }
+  #navLinks.active li:nth-child(7) { animation-delay: 0.35s; }
+  #navLinks.active li:nth-child(8) { animation-delay: 0.4s; }
+}
+
+/* Tap / Press Feedback — Mobile Touch Feedback */
+.btn:active, .cta-btn:active, .book-service-btn:active, .submit-btn:active,
+.book-btn-large:active, .book-btn:active, .filter-btn:active {
+  transform: scale(0.96);
+}
+
+.service-card:active, .service-detail-card:active, .price-card:active,
+.gallery-item:active, .review-card:active, .testimonial:active,
+.blog-card:active, .blog-post:active, .lookbook-item:active,
+.highlight-card:active, .policy-card-item:active, .calc-option-card:active {
+  transform: scale(0.98);
+}
+
+/* Image Fade-In On Load */
+.service-card img, .service-detail-card img, .gallery-item img,
+.blog-card img, .blog-post img, .lookbook-item img, .price-card img {
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.service-card img.img-loaded, .service-detail-card img.img-loaded, .gallery-item img.img-loaded,
+.blog-card img.img-loaded, .blog-post img.img-loaded, .lookbook-item img.img-loaded, .price-card img.img-loaded {
+  opacity: 1;
+}
+
+/* Click Ripple Effect */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  background: rgba(255, 255, 255, 0.55);
+  pointer-events: none;
+  animation: rippleEffect 0.6s ease-out;
+}
+
+@keyframes rippleEffect {
+  to {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+/* Respect Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal, .reveal .stagger-grid > * {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
