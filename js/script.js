@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Respect user's reduced-motion preference for JS-driven animation/effects
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     // Dynamic Copyright Year
     const currentYear = new Date().getFullYear();
     document.querySelectorAll('.copyright-year, #currentYear').forEach(el => {
@@ -361,9 +364,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 8. Hero Particles Canvas
+    // 8. Hero Particles Canvas (skipped when reduced motion is preferred)
     const heroParticles = document.getElementById('heroParticles');
-    if (heroParticles) {
+    if (heroParticles && !prefersReducedMotion) {
         const ctx = heroParticles.getContext('2d');
         let particles = [];
         
@@ -444,10 +447,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    const parallaxHero = document.querySelector('.hero');
-    const parallaxInner = document.querySelector('.hero .inner');
-    
-    if (parallaxHero && parallaxInner) {
+    const parallaxHero = document.querySelector('header#home');
+    const parallaxInner = document.querySelector('header#home .inner');
+
+    if (parallaxHero && parallaxInner && !prefersReducedMotion) {
         window.addEventListener('scroll', () => {
             const rect = parallaxHero.getBoundingClientRect();
             if (rect.top < window.innerHeight && rect.bottom > 0) {
@@ -478,9 +481,64 @@ document.addEventListener('DOMContentLoaded', () => {
             calcCheckboxes.forEach(cb => {
                 cb.addEventListener('change', updateTotal);
             });
-            
+
             // Initial calculation
             updateTotal();
         }
     }
+
+    // 11. Scroll Progress Bar
+    const progressBar = document.createElement('div');
+    progressBar.className = 'scroll-progress-bar';
+    document.body.appendChild(progressBar);
+
+    let progressTicking = false;
+    const updateScrollProgress = () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrolled = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        progressBar.style.width = `${Math.min(scrolled, 100)}%`;
+        progressTicking = false;
+    };
+
+    window.addEventListener('scroll', () => {
+        if (!progressTicking) {
+            requestAnimationFrame(updateScrollProgress);
+            progressTicking = true;
+        }
+    }, { passive: true });
+
+    updateScrollProgress();
+
+    // 12. Button Ripple Effect (skipped when reduced motion is preferred)
+    if (!prefersReducedMotion) {
+        document.addEventListener('click', (e) => {
+            const rippleTarget = e.target.closest('.btn, .cta-btn, .book-service-btn, .submit-btn, .book-btn-large, .book-btn, .filter-btn');
+            if (!rippleTarget) return;
+
+            const rect = rippleTarget.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const ripple = document.createElement('span');
+            ripple.className = 'ripple';
+            ripple.style.width = ripple.style.height = `${size}px`;
+            ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
+            ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
+
+            rippleTarget.appendChild(ripple);
+            ripple.addEventListener('animationend', () => ripple.remove());
+        });
+    }
+
+    // 13. Image Fade-In On Load
+    const fadeImages = document.querySelectorAll(
+        '.service-card img, .service-detail-card img, .gallery-item img, .blog-card img, .blog-post img, .lookbook-item img, .price-card img'
+    );
+    fadeImages.forEach(img => {
+        if (img.complete) {
+            img.classList.add('img-loaded');
+        } else {
+            img.addEventListener('load', () => img.classList.add('img-loaded'));
+            img.addEventListener('error', () => img.classList.add('img-loaded'));
+        }
+    });
 });
